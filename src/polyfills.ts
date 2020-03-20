@@ -61,3 +61,7 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+// For key-encoder lib
+(window as any).global = window;
+global.Buffer = global.Buffer || require('buffer').Buffer;
