@@ -1,0 +1,4 @@
+<input type="file" accept=".csv" (change)="parseFile($event.target.files)">
+
+<!-- Add better table formatting -->
+<div *ngFor="let row of rows">{{row}}</div>
