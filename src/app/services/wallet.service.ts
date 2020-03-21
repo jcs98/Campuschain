@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ec as EC } from 'elliptic';
 import { sha256 } from 'js-sha256';
 import KeyEncoder from 'key-encoder';
@@ -17,6 +18,8 @@ export class WalletService {
   private ec: EC;
   private keyEncoder: KeyEncoder;
 
+  observablePublicKey = new BehaviorSubject(this.getPublicKey());
+
   constructor() {
     this.ec = new EC('p256');
     this.keyEncoder = new KeyEncoder(encoderOptions);
@@ -24,19 +27,18 @@ export class WalletService {
 
   generateKeyPair(): any {
     const keyPair = this.ec.genKeyPair();
-    return this.storeAndGetKeys(keyPair);
+    return this.getKeys(keyPair);
   }
 
   importKeysFromPrivate(priv: string): any {
     const keyPair = this.ec.keyFromPrivate(priv);
-    return this.storeAndGetKeys(keyPair);
+    return this.getKeys(keyPair);
   }
 
-  storeAndGetKeys(keyPair: any): any {
+  getKeys(keyPair: any): any {
     const privateKey = keyPair.getPrivate('hex');
     const publicKey = this.getPEMPublicKey(keyPair);
     const keys = { publicKey, privateKey };
-    this.storeKeys(keys);
     return keys;
   }
 
@@ -49,18 +51,33 @@ export class WalletService {
     return publicKey;
   }
 
-  storeKeys(keys: any) { }
+  storeKeys(keys: any) {
+    // check pin if required
+    this.observablePublicKey.next(keys.publicKey);
+    // encrypt if required
+    localStorage.setItem('keys', JSON.stringify(keys));
+  }
 
   getPublicKey(): string {
+    const keys = JSON.parse(localStorage.getItem('keys'));
+    if (keys) {
+      return keys.publicKey;
+    }
     return '';
   }
 
   getPrivateKey(): string {
+    // check pin if required
+    const keys = JSON.parse(localStorage.getItem('keys'));
+    if (keys) {
+      return keys.privateKey;
+    }
     return '';
   }
 
-  sign(tx: string): string {
-    const msgHash = sha256(tx);
+  sign(msg: string): string {
+    // check pin if required
+    const msgHash = sha256(msg);
     const privateKey = this.getPrivateKey();
     const keyPair = this.ec.keyFromPrivate(privateKey);
     const signature = keyPair.sign(msgHash);

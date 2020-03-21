@@ -7,8 +7,7 @@ import { WalletService } from '../../services/wallet.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private privateKey: string;
-  private publicKey: string;
+  private keys: any;
   private inputPrivateKey: string;
 
   constructor(public walletService: WalletService) { }
@@ -17,16 +16,16 @@ export class LoginComponent implements OnInit {
 
   importKeys() {
     if (this.inputPrivateKey) {
-      const keys = this.walletService.importKeysFromPrivate(this.inputPrivateKey);
-      this.publicKey = keys.publicKey;
-      this.privateKey = keys.privateKey;
+      this.keys = this.walletService.importKeysFromPrivate(this.inputPrivateKey);
     }
   }
 
   generateKeys() {
-    const keys = this.walletService.generateKeyPair();
-    this.publicKey = keys.publicKey;
-    this.privateKey = keys.privateKey;
+    this.keys = this.walletService.generateKeyPair();
+  }
+
+  updateKeys() {
+    this.walletService.storeKeys(this.keys);
   }
 
 }
