@@ -1,1 +1,49 @@
-<p>navbar works!</p>
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>Campuschain</h3>
+        <strong><i class="fas fa-university"></i></strong>
+    </div>
+
+    <ul class="list-unstyled components">
+        <li>
+            <a [routerLink]="['/']">
+                <i class="fas fa-home"></i>
+                Home
+            </a>
+        </li>
+        <li class="active">
+            <a href="#certificateSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fas fa-graduation-cap"></i>
+                VJTI Transcript
+            </a>
+            <ul class="collapse list-unstyled" id="certificateSubmenu">
+                <li>
+                    <a [routerLink]="['/upload-batch']" style="color: black;">
+                        <i class="fas fa-upload"></i>
+                        Upload Batch Data
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/verify-leaf']" style="color: black;">
+                        <i class="fas fa-check"></i>
+                        Verify Certificate
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a [routerLink]="['/login']">
+                <i class="fas fa-briefcase"></i>
+                Update Keys
+            </a>
+        </li>
+    </ul>
+
+    <ul class="list-unstyled CTAs">
+        <li>
+            <a href="https://play.google.com/store/apps/details?id=com.vjti.blockchain.wallet" class="download"
+                style="text-align: center;">Download
+                Mobile App</a>
+        </li>
+    </ul>
+</nav>
