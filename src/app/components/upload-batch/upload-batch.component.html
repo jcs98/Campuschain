@@ -1,8 +1,6 @@
 <input type="file" accept=".csv" (change)="parseFile($event.target.files)">
-<div *ngIf="rows">
-    <input type="text" placeholder="private key">
-    <input type="button" value="Add to Blockchain" (click)="addToBlockchain()">
-</div>
+<input *ngIf="rows" type="button" value="Add to Blockchain" (click)="addToBlockchain()">
+
 
 <!-- Add better table formatting -->
 <div *ngFor="let row of rows">{{row}}</div>
