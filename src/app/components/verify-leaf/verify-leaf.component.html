@@ -1,1 +1,5 @@
-<p>verify-leaf works!</p>
+<input type="file" accept=".json" (change)="parseFile($event.target.files)">
+<input type="text" placeholder="Adder's Public Key" [(ngModel)]="adderPublicKey">
+<input *ngIf="leafData && adderPublicKey" type="button" value="Verify" (click)="verifyFromBlockchain()">
+
+<div>{{leafData}}</div>

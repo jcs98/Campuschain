@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MerkleService } from '../../services/merkle.service';
+import { BlockchainClientService } from '../../services/blockchain-client.service';
 import { Papa } from 'ngx-papaparse';
 import { saveAs } from 'file-saver';
 import * as JSZip from 'jszip';
@@ -12,7 +13,7 @@ import * as JSZip from 'jszip';
 export class UploadBatchComponent implements OnInit {
   private rows;
 
-  constructor(private papa: Papa, private merkleService: MerkleService) { }
+  constructor(private papa: Papa, private merkleService: MerkleService, private blockchainClientService: BlockchainClientService) { }
 
   ngOnInit() {
   }
@@ -20,7 +21,10 @@ export class UploadBatchComponent implements OnInit {
   parseFile(files: FileList) {
     if (files && files.length > 0) {
       const file = files.item(0);
-      // console.log(file.type); // can use for type checking safety
+      if (!this.checkFile(file)) {
+        // clear files here
+        return;
+      }
       const reader = new FileReader();
       reader.readAsText(file);
 
@@ -36,9 +40,17 @@ export class UploadBatchComponent implements OnInit {
     }
   }
 
+  checkFile(file) {
+    if (file.type !== 'text/csv') {
+      alert('File type must be csv !');
+      return false;
+    }
+    return true;
+  }
+
   addToBlockchain() {
     const merkleRoot = this.merkleService.getMerkleRoot(this.rows);
-    // add to blockchain
+    this.blockchainClientService.addData(merkleRoot);
     this.downloadCertis(this.rows);
   }
 

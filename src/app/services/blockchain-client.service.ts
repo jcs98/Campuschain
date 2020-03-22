@@ -19,5 +19,6 @@ export class BlockchainClientService {
 
   verifyData(data, adderPublicKey) {
     // get all transactions for adderPublicKey and verify if data exists in any of them
+    return true;
   }
 }
