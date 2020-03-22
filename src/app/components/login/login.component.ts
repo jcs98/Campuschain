@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
   private keys: any;
   private inputPrivateKey: string;
 
-  constructor(public walletService: WalletService) { }
+  constructor(private walletService: WalletService) { }
 
   ngOnInit() { }
 

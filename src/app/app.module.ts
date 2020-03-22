@@ -6,12 +6,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { UploadBatchComponent } from './components/upload-batch/upload-batch.component';
+import { VerifyLeafComponent } from './components/verify-leaf/verify-leaf.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    UploadBatchComponent
+    UploadBatchComponent,
+    VerifyLeafComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

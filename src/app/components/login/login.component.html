@@ -1,12 +1,12 @@
 <h2>Import Private Key</h2>
 <input type="text" [(ngModel)]="inputPrivateKey">
-<input type="button" value="Import" (click)="this.importKeys()">
+<input type="button" value="Import" (click)="importKeys()">
 
 <h2>Generate New Keys</h2>
-<input type="button" value="Generate" (click)="this.generateKeys()">
+<input type="button" value="Generate" (click)="generateKeys()">
 
 <hr>
 
 <div>Public Key: {{keys?.publicKey}}</div>
 <div>Private Key: {{keys?.privateKey}}</div>
-<input *ngIf="keys?.publicKey" type="button" value="Update" (click)="this.updateKeys()">
+<input *ngIf="keys?.publicKey" type="button" value="Update" (click)="updateKeys()">

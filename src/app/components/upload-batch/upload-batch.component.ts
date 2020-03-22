@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MerkleService } from '../../services/merkle.service';
 import { Papa } from 'ngx-papaparse';
-// import * as FileSaver from 'file-saver';
 import { saveAs } from 'file-saver';
 import * as JSZip from 'jszip';
 
@@ -12,7 +12,7 @@ import * as JSZip from 'jszip';
 export class UploadBatchComponent implements OnInit {
   private rows;
 
-  constructor(private papa: Papa) { }
+  constructor(private papa: Papa, private merkleService: MerkleService) { }
 
   ngOnInit() {
   }
@@ -26,31 +26,35 @@ export class UploadBatchComponent implements OnInit {
 
       reader.onload = (e) => {
         const csv = reader.result.toString();
-        // console.log(csv);
         this.papa.parse(csv, {
           skipEmptyLines: true,
           complete: (result) => {
-            // console.log('Parsed: ', result.data);
             this.rows = result.data;
-            // create merkle root
-            this.downloadCertis(result.data);
           }
         });
       };
     }
   }
 
+  addToBlockchain() {
+    const merkleRoot = this.merkleService.getMerkleRoot(this.rows);
+    // add to blockchain
+    this.downloadCertis(this.rows);
+  }
+
   downloadCertis(rows) {
     const zip = new JSZip();
 
+    let index = 0;
     rows.forEach(row => {
       const student: any = {};
       student.cpi = row[2].toString();
       student.name = row[1].toString();
       student.year = row[3].toString();
       student.studentId = row[0].toString();
-      student.merklePath = ''; // get merkle path
+      student.merklePath = this.merkleService.getMerklePath(index);
       zip.file(student.studentId + '.json', JSON.stringify(student));
+      index++;
     });
 
     zip.generateAsync({ type: 'blob' })
