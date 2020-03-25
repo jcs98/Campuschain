@@ -49,7 +49,7 @@ export class UploadBatchComponent implements OnInit {
   }
 
   addToBlockchain() {
-    const merkleRoot = this.merkleService.getMerkleRoot(this.rows);
+    const merkleRoot = this.merkleService.getMerkleTreeRoot(this.rows);
     this.blockchainClientService.addData(merkleRoot);
     this.downloadCertis(this.rows);
   }

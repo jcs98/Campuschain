@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UploadBatchComponent } from './components/upload-batch/upload-batch.component';
 import { VerifyLeafComponent } from './components/verify-leaf/verify-leaf.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

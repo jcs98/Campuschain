@@ -42,9 +42,10 @@ export class VerifyLeafComponent implements OnInit {
 
   verifyFromBlockchain() {
     const data = JSON.parse(this.leafData);
-    const merkleRoot = this.merkleService.getRootFromLeaf(data, data.merklePath);
+    const blockchainMerkleRoot = this.blockchainClientService.getMerkleRootStored(this.adderPublicKey)
+    const validRoot = this.merkleService.getRootFromLeaf(data.merklePath, data, blockchainMerkleRoot);
 
-    if (this.blockchainClientService.verifyData(merkleRoot, this.adderPublicKey)) {
+    if (validRoot) {
       alert('Verified Successfully !');
     } else {
       alert('Verification unsuccessful');
