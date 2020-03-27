@@ -9,6 +9,7 @@ import { UploadBatchComponent } from './components/upload-batch/upload-batch.com
 import { VerifyLeafComponent } from './components/verify-leaf/verify-leaf.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from "@angular/common/http";
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HttpClientModule } from "@angular/common/http";
     LoginComponent,
     UploadBatchComponent,
     VerifyLeafComponent,
-    NavbarComponent
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

@@ -1,10 +1,18 @@
-<div class="bucket uploadBucket">
-    <input id="jsonCertificateInput" type="file" accept=".json" (change)="parseFile($event.target.files)">
-    <p #uploadText>Drag your JSON Certificate or click in this area</p>
+<h2>Verify student details</h2>
+<div class="bucket mt-4">
+    <input type="file" accept=".json" (change)="parseFile($event.target.files)">
+    <i class="fas fa-upload fa-3x mb-3"></i>
+    <h3>{{leafData ? "File Uploaded" : "Drag your JSON Certificate or click in this area"}}</h3>
 </div>
 
-<input type="text" placeholder="Adder's Public Key" [(ngModel)]="adderPublicKey">
+<h4 class="mt-4">Adder's Public Key:</h4>
+<input type="text" class="form-control" placeholder="Paste adder's public key here" [(ngModel)]="adderPublicKey">
 
-<input *ngIf="leafData && adderPublicKey" type="button" value="Verify" (click)="verifyFromBlockchain()">
 
-<div>{{leafData}}</div>
+<input *ngIf="leafData && adderPublicKey" class="btn btn-lg btn-success mt-4" type="button" value="Verify"
+    (click)="verifyFromBlockchain()">
+
+<div class="mt-4"> <strong>Id:</strong> {{leafData?.studentId}}</div>
+<div class="mt-4"> <strong>Name:</strong> {{leafData?.name}}</div>
+<div class="mt-4"> <strong>CPI:</strong> {{leafData?.cpi}}</div>
+<div class="mt-4"> <strong>Year:</strong> {{leafData?.year}}</div>

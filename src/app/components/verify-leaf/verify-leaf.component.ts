@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MerkleService } from '../../services/merkle.service';
 import { BlockchainClientService } from '../../services/blockchain-client.service';
 
@@ -8,7 +8,6 @@ import { BlockchainClientService } from '../../services/blockchain-client.servic
   styleUrls: ['./verify-leaf.component.scss']
 })
 export class VerifyLeafComponent implements OnInit {
-  @ViewChild('uploadText', { static: false }) pUploadText: ElementRef;
 
   private leafData;
   private adderPublicKey;
@@ -25,12 +24,12 @@ export class VerifyLeafComponent implements OnInit {
         // clear files here
         return;
       }
-      this.pUploadText.nativeElement.innerHTML = '1 File selected';
+
       const reader = new FileReader();
       reader.readAsText(file);
 
       reader.onload = (e) => {
-        this.leafData = reader.result.toString();
+        this.leafData = JSON.parse(reader.result as string);
       };
     }
   }
@@ -49,7 +48,7 @@ export class VerifyLeafComponent implements OnInit {
   }
 
   async verifyFromBlockchain() {
-    const data = JSON.parse(this.leafData);
+    const data = this.leafData;
 
 
     const transactions = await this.blockchainClientService.getTransactionHistory(this.adderPublicKey)

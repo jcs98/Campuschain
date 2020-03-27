@@ -1,9 +1,32 @@
-<div class="bucket uploadBucket">
+<h2>Upload student details to the blockchain</h2>
+<div class="bucket mt-4">
     <input type="file" accept=".csv" (change)="parseFile($event.target.files)">
-    <p #uploadText>Drag your CSV or click in this area</p>
+    <i class="fas fa-upload fa-3x mb-3"></i>
+    <h3>{{rows ? "File Uploaded" : "Drag and drop CSV or click in this area"}}</h3>
 </div>
-<input *ngIf="rows" type="button" value="Add to Blockchain" (click)="addToBlockchain()">
 
+<input class="btn btn-lg btn-success mt-4" *ngIf="rows" type="button" value="Add to Blockchain"
+    (click)="addToBlockchain()">
 
-<!-- Add better table formatting -->
-<div *ngFor="let row of rows">{{row}}</div>
+<div class="scrolling-table">
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>CPI</th>
+                <th>Batch</th>
+                <th>College</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows">
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+                <td>{{row[4]}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
