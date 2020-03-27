@@ -7,8 +7,8 @@ import { BlockchainClientService } from '../../services/blockchain-client.servic
   templateUrl: './verify-leaf.component.html',
   styleUrls: ['./verify-leaf.component.scss']
 })
-export class VerifyLeafComponent implements OnInit{
-  @ViewChild("uploadText", {static: false}) pUploadText: ElementRef;
+export class VerifyLeafComponent implements OnInit {
+  @ViewChild('uploadText', { static: false }) pUploadText: ElementRef;
 
   private leafData;
   private adderPublicKey;
@@ -25,7 +25,7 @@ export class VerifyLeafComponent implements OnInit{
         // clear files here
         return;
       }
-      this.pUploadText.nativeElement.innerHTML = "1 File selected";
+      this.pUploadText.nativeElement.innerHTML = '1 File selected';
       const reader = new FileReader();
       reader.readAsText(file);
 
@@ -43,25 +43,26 @@ export class VerifyLeafComponent implements OnInit{
     return true;
   }
 
-  _isHex (value) {
-    var hexRegex = /^[0-9A-Fa-f]{2,}$/
-    return hexRegex.test(value)
+  _isHex(value) {
+    const hexRegex = /^[0-9A-Fa-f]{2,}$/;
+    return hexRegex.test(value);
   }
 
   async verifyFromBlockchain() {
     const data = JSON.parse(this.leafData);
-    
 
-    const blockchainMerkleRoot = await this.blockchainClientService.getMerkleRootStored(this.adderPublicKey).then((response)=> { return response })
-    
+
+    const transactions = await this.blockchainClientService.getTransactionHistory(this.adderPublicKey)
+      .then((response) => response);
+
     let success = false;
 
-    blockchainMerkleRoot.forEach(blockchainTransaction => {
-      const blockchainMerkleRoot = JSON.parse(blockchainTransaction).message;
-      if(this._isHex(blockchainMerkleRoot)){
+    transactions.forEach(tx => {
+      const blockchainMerkleRoot = JSON.parse(tx).message;
+      if (this._isHex(blockchainMerkleRoot)) {
         const validRoot = this.merkleService.getRootFromLeaf(data.merklePath, data.leafNode, blockchainMerkleRoot);
-        
-        if(validRoot){
+
+        if (validRoot) {
           success = true;
         }
       }

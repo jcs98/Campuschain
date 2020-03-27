@@ -11,7 +11,7 @@ import * as JSZip from 'jszip';
   styleUrls: ['./upload-batch.component.scss']
 })
 export class UploadBatchComponent implements OnInit {
-  @ViewChild("uploadText", {static: false}) pUploadText: ElementRef;
+  @ViewChild('uploadText', { static: false }) pUploadText: ElementRef;
 
   private rows;
 
@@ -27,7 +27,7 @@ export class UploadBatchComponent implements OnInit {
         // clear files here
         return;
       }
-      this.pUploadText.nativeElement.innerHTML = "1 File selected";
+      this.pUploadText.nativeElement.innerHTML = '1 File selected';
       const reader = new FileReader();
       reader.readAsText(file);
 
@@ -53,14 +53,14 @@ export class UploadBatchComponent implements OnInit {
 
   async addToBlockchain() {
     const merkleRoot = this.merkleService.getMerkleTreeRoot(this.rows);
-    const responseData = await this.blockchainClientService.addData(merkleRoot).then((response)=> {return response});
-    
-    if(responseData.status == "Success") {
+    const responseData = await this.blockchainClientService.addData(merkleRoot).then((response) => response);
+
+    if (responseData.status === 'Success') {
       //  Insert flash message code
       this.downloadCertis(this.rows);
     } else {
       //  Insert flash message code for error
-      alert(responseData.message)
+      alert(responseData.message);
     }
   }
 
