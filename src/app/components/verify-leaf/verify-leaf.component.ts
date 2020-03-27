@@ -40,12 +40,31 @@ export class VerifyLeafComponent implements OnInit {
     return true;
   }
 
-  verifyFromBlockchain() {
-    const data = JSON.parse(this.leafData);
-    const blockchainMerkleRoot = this.blockchainClientService.getMerkleRootStored(this.adderPublicKey)
-    const validRoot = this.merkleService.getRootFromLeaf(data.merklePath, data, blockchainMerkleRoot);
+  _isHex (value) {
+    var hexRegex = /^[0-9A-Fa-f]{2,}$/
+    return hexRegex.test(value)
+  }
 
-    if (validRoot) {
+  async verifyFromBlockchain() {
+    const data = JSON.parse(this.leafData);
+    
+
+    const blockchainMerkleRoot = await this.blockchainClientService.getMerkleRootStored(this.adderPublicKey).then((response)=> { return response })
+    
+    let success = false;
+
+    blockchainMerkleRoot.forEach(blockchainTransaction => {
+      const blockchainMerkleRoot = JSON.parse(blockchainTransaction).message;
+      if(this._isHex(blockchainMerkleRoot)){
+        const validRoot = this.merkleService.getRootFromLeaf(data.merklePath, data.leafNode, blockchainMerkleRoot);
+        
+        if(validRoot){
+          success = true;
+        }
+      }
+    });
+
+    if (success) {
       alert('Verified Successfully !');
     } else {
       alert('Verification unsuccessful');

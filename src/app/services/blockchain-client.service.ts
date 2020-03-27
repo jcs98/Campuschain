@@ -6,60 +6,103 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
   providedIn: 'root'
 })
 export class BlockchainClientService {
-
-  blockchainServerUrl: string = 'http://0.0.0.0:';
-  blockchainServerPort: string = '9000';
   blockchainServerMakeTransaction: string = '/makeTransaction';
   blockchainServerSendTransaction: string = '/sendTransaction';
+  blockchainServerTransactionHistory:string = "/transactionHistory";
   blockchainBurnAccountPublicKey: string = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3s5Iqp9VzlL7ngLfR2xb1RIGfuo+siL/zaZdeFblI8pnU5SpJCFEEMZDQBnEEPIOz9bv9lK46AwV3vLcN1VpCA==';
   blockchainBurnAmount: string = '5';
+  sendThis: any;
+  signThis: any;
 
   constructor(private walletService: WalletService, private http: HttpClient) { }
 
-  addData(data) {
-    let httpHeaders = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*'
-    });
+  async addDataToBlockchain(makeTransactionRequestData) {
+    var success = false;
 
-    var requestData = {
-      method: 'POST',
-      url: `${this.blockchainServerUrl}${this.blockchainServerPort}${this.blockchainServerMakeTransaction}`,
-      headers: {
-        'Content-Type': 'application/json'
+    await this.http
+    .post(this.blockchainServerMakeTransaction, makeTransactionRequestData)
+    .toPromise()
+    .then(
+      async(makeTransactionResponse) =>  {
+        const sendTransactionRequestData = {
+            "transaction": makeTransactionResponse.send_this,
+            "signature": this.walletService.sign(makeTransactionResponse.sign_this)
+        }
+
+        await this.http
+          .post(this.blockchainServerSendTransaction, sendTransactionRequestData, { responseType: 'text' })
+          .toPromise()
+          .then((sendTransactionResponse) => {
+            if(sendTransactionResponse == "Done") {
+              success = true;
+            }
+          },
+            (error) => {
+              console.log(error)
+            })
       },
-      data: {
-        "receiver_public_key": this.blockchainBurnAccountPublicKey,
-        "sender_public_key": this.walletService.getPublicKey(),
-        "message": data,
-        "bounty": this.blockchainBurnAmount
-      },
-      options: {
-        headers: httpHeaders
+      (error) => {
+        // Error
+        console.log("err", error);
       }
+    );
+    
+    return success;
+  }
+
+  async addData(data) {
+    const makeTransactionRequestData = {
+      "receiver_public_key": this.blockchainBurnAccountPublicKey,
+      "sender_public_key": this.walletService.getPublicKey(),
+      "message": data,
+      "bounty": this.blockchainBurnAmount
     }
 
-    this.http
-      .post(requestData.url, requestData.data, requestData.options)
-      .toPromise()
-      .then((res: any) => {
-        console.log(res)
-      },
-        err => {
-          // Error
-          console.log(err);
-        }
-      );
+    let success:boolean = false;
 
     if (this.walletService.getPublicKey()) {
-      const sign = this.walletService.sign(data);
       // create transaction and add to blockchain
+      await this.addDataToBlockchain(makeTransactionRequestData)
+      .then((response) => {
+        success = response;
+      })
+
     } else {
       alert('No keys found to sign transaction, please add a key pair first!');
     }
+
+    return success
   }
 
-  getMerkleRootStored(adderPublicKey) {
-    // get all transactions for adderPublicKey and verify if data exists in any of them
-    return true;
+  async getBlockchainTransactionHistory(transactionHistoryRequestData) {
+    var transactionHistory: any;
+
+    await this.http
+    .post(this.blockchainServerTransactionHistory, transactionHistoryRequestData)
+    .toPromise()
+    .then((res) => {
+      transactionHistory = res;
+    },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    return transactionHistory
   }
+
+  async getMerkleRootStored(adderPublicKey) {
+    const transactionHistoryRequestData = {
+      "public_key": adderPublicKey
+    }
+    
+    var transactionHistory: any;
+
+    await this.getBlockchainTransactionHistory(transactionHistoryRequestData)
+    .then((response) => {
+      transactionHistory = response;
+    })
+    return transactionHistory;
+  }
+  
 }

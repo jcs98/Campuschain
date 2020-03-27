@@ -47,6 +47,10 @@ export class MerkleService {
     return this.merkleTools.getProof(index);
   }
 
+  getLeaf(index: number) { 
+    return this.merkleTools.getLeaf(index).toString('hex');
+  }
+
   getRootFromLeaf(merklePath, data, merkleRoot) {
     return this.merkleTools.validateProof(merklePath, data, merkleRoot, this.doHash);
   }

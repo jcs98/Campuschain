@@ -48,10 +48,15 @@ export class UploadBatchComponent implements OnInit {
     return true;
   }
 
-  addToBlockchain() {
+  async addToBlockchain() {
     const merkleRoot = this.merkleService.getMerkleTreeRoot(this.rows);
-    this.blockchainClientService.addData(merkleRoot);
-    this.downloadCertis(this.rows);
+    const success = await this.blockchainClientService.addData(merkleRoot).then((response)=> {return response});
+    if(success) {
+      //  Insert flash message code
+      this.downloadCertis(this.rows);
+    } else {
+      //  Insert flash message code for error
+    }
   }
 
   downloadCertis(rows) {
@@ -65,6 +70,7 @@ export class UploadBatchComponent implements OnInit {
       student.year = row[3].toString();
       student.studentId = row[0].toString();
       student.merklePath = this.merkleService.getMerklePath(index);
+      student.leafNode = this.merkleService.getLeaf(index);
       zip.file(student.studentId + '.json', JSON.stringify(student));
       index++;
     });

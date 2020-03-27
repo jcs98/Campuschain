@@ -1,7 +1,23 @@
 {
-    "/api/*": {
-        "target": "http://localhost:4200",
+    "/makeTransaction": {
+        "target": "http://0.0.0.0:9000/makeTransaction",
         "secure": false,
-        "logLevel": "debug"
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {"^/makeTransaction" : ""}
+    },
+    "/sendTransaction": {
+        "target": "http://0.0.0.0:9000/sendTransaction",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {"^/sendTransaction" : ""}
+    },
+    "/transactionHistory": {
+        "target": "http://0.0.0.0:9000/transactionHistory",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {"^/transactionHistory" : ""}
     }
 }
