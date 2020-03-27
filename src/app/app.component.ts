@@ -8,6 +8,7 @@ import { WalletService } from './services/wallet.service';
 })
 export class AppComponent implements OnInit {
   private publicKey: string;
+  private sideBarIsActive: boolean;
 
   constructor(public walletService: WalletService) { }
 

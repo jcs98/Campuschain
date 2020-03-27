@@ -1,5 +1,12 @@
-<app-navbar></app-navbar>
+<div class="wrapper">
+    <app-navbar [active]="sideBarIsActive"></app-navbar>
 
-<p><b>Currently using: </b>{{publicKey ? publicKey : "No Keys Found!"}}</p>
-
-<router-outlet></router-outlet>
+    <div id="content">
+        <button type="button" id="sidebarCollapse" (click)="sideBarIsActive = !sideBarIsActive" class="btn btn-info"
+            style="background-color:#362291; color: white;">
+            <i style="color: white;" class="fas fa-align-left"></i>
+        </button>
+        <span class="ml-3"><b>Currently using: </b>{{publicKey ? publicKey : "No Keys Found!"}}</span>
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,6 +1,6 @@
-<nav id="sidebar">
+<nav id="sidebar" [ngClass]="{'active': active}">
     <div class="sidebar-header">
-        <h3 style="color: black;">Campuschain</h3>
+        <h3>Campuschain</h3>
         <strong><i class="fas fa-university"></i></strong>
     </div>
 
@@ -11,7 +11,7 @@
                 Home
             </a>
         </li>
-        <li class="active">
+        <li>
             <a href="#certificateSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <i class="fas fa-graduation-cap"></i>
                 VJTI Transcript
