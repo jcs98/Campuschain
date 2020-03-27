@@ -68,7 +68,7 @@ export class VerifyLeafComponent implements OnInit{
     });
 
     if (success) {
-      alert('Verified Successfully !');
+      alert('Verified Successfully!');
     } else {
       alert('Verification unsuccessful');
     }

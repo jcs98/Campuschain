@@ -53,12 +53,14 @@ export class UploadBatchComponent implements OnInit {
 
   async addToBlockchain() {
     const merkleRoot = this.merkleService.getMerkleTreeRoot(this.rows);
-    const success = await this.blockchainClientService.addData(merkleRoot).then((response)=> {return response});
-    if(success) {
+    const responseData = await this.blockchainClientService.addData(merkleRoot).then((response)=> {return response});
+    
+    if(responseData.status == "Success") {
       //  Insert flash message code
       this.downloadCertis(this.rows);
     } else {
       //  Insert flash message code for error
+      alert(responseData.message)
     }
   }
 

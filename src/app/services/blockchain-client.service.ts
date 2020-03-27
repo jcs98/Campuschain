@@ -17,7 +17,10 @@ export class BlockchainClientService {
   constructor(private walletService: WalletService, private http: HttpClient) { }
 
   async addDataToBlockchain(makeTransactionRequestData) {
-    var success = false;
+    let responseData = {
+      status: "Error",
+      message: "Unable to connect to the blockchain, please try again later."
+    }
 
     await this.http
     .post(this.blockchainServerMakeTransaction, makeTransactionRequestData)
@@ -34,20 +37,31 @@ export class BlockchainClientService {
           .toPromise()
           .then((sendTransactionResponse) => {
             if(sendTransactionResponse == "Done") {
-              success = true;
+              responseData.status = "Success";
+              responseData.message = "Added Merkle root to the blockchain."
             }
           },
             (error) => {
-              console.log(error)
-            })
+              responseData.message = "Unable to send transaction to the blockchain, please try again later."
+            }) 
       },
       (error) => {
         // Error
-        console.log("err", error);
+        if(error.status == 400) {
+          if(error.error.includes("Insufficient Balance to make Transaction")){
+            responseData.message = error.error
+          }
+          else if (error.error.includes("Invalid Receiver Public Key")) {
+            responseData.message = error.error
+          }
+          else if (error.error.includes("Cannot send money to youself")) {
+            responseData.message = "Use another account to add data to the blockchain, cannot send money to oneself."
+          }
+        }
       }
     );
     
-    return success;
+    return responseData
   }
 
   async addData(data) {
@@ -58,20 +72,25 @@ export class BlockchainClientService {
       "bounty": this.blockchainBurnAmount
     }
 
-    let success:boolean = false;
+    let responseData = {
+      status: "",
+      message: ""
+    }
 
     if (this.walletService.getPublicKey()) {
       // create transaction and add to blockchain
       await this.addDataToBlockchain(makeTransactionRequestData)
       .then((response) => {
-        success = response;
+        responseData.status = response.status;
+        responseData.message = response.message;
       })
 
     } else {
-      alert('No keys found to sign transaction, please add a key pair first!');
+      responseData.status = "Error";
+      responseData.message = "No keys found to sign transaction, please add a key pair first!";
     }
 
-    return success
+    return responseData
   }
 
   async getBlockchainTransactionHistory(transactionHistoryRequestData) {
