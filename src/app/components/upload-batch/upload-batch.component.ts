@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MerkleService } from '../../services/merkle.service';
 import { BlockchainClientService } from '../../services/blockchain-client.service';
 import { Papa } from 'ngx-papaparse';
@@ -11,6 +11,8 @@ import * as JSZip from 'jszip';
   styleUrls: ['./upload-batch.component.scss']
 })
 export class UploadBatchComponent implements OnInit {
+  @ViewChild("uploadText", {static: false}) pUploadText: ElementRef;
+
   private rows;
 
   constructor(private papa: Papa, private merkleService: MerkleService, private blockchainClientService: BlockchainClientService) { }
@@ -25,6 +27,7 @@ export class UploadBatchComponent implements OnInit {
         // clear files here
         return;
       }
+      this.pUploadText.nativeElement.innerHTML = "1 File selected";
       const reader = new FileReader();
       reader.readAsText(file);
 

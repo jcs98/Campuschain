@@ -1,4 +1,7 @@
-<input type="file" accept=".csv" (change)="parseFile($event.target.files)">
+<div class="bucket uploadBucket">
+    <input type="file" accept=".csv" (change)="parseFile($event.target.files)">
+    <p #uploadText>Drag your CSV or click in this area</p>
+</div>
 <input *ngIf="rows" type="button" value="Add to Blockchain" (click)="addToBlockchain()">
 
 

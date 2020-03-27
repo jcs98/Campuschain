@@ -9,7 +9,7 @@ export class BlockchainClientService {
   blockchainServerMakeTransaction: string = '/makeTransaction';
   blockchainServerSendTransaction: string = '/sendTransaction';
   blockchainServerTransactionHistory:string = "/transactionHistory";
-  blockchainBurnAccountPublicKey: string = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3s5Iqp9VzlL7ngLfR2xb1RIGfuo+siL/zaZdeFblI8pnU5SpJCFEEMZDQBnEEPIOz9bv9lK46AwV3vLcN1VpCA==';
+  blockchainBurnAccountPublicKey: string = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmoylu2ohWpnsOlGXB+yZkQzMQnSqfH00o4lfVWSEzJG8mlIiZM+gdRo6trGyCDWv5rRScmp/yEz6RcDNk9t5CQ==';
   blockchainBurnAmount: string = '5';
   sendThis: any;
   signThis: any;

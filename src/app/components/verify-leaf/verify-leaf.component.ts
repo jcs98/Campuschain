@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { MerkleService } from '../../services/merkle.service';
 import { BlockchainClientService } from '../../services/blockchain-client.service';
 
@@ -7,7 +7,9 @@ import { BlockchainClientService } from '../../services/blockchain-client.servic
   templateUrl: './verify-leaf.component.html',
   styleUrls: ['./verify-leaf.component.scss']
 })
-export class VerifyLeafComponent implements OnInit {
+export class VerifyLeafComponent implements OnInit{
+  @ViewChild("uploadText", {static: false}) pUploadText: ElementRef;
+
   private leafData;
   private adderPublicKey;
 
@@ -23,6 +25,7 @@ export class VerifyLeafComponent implements OnInit {
         // clear files here
         return;
       }
+      this.pUploadText.nativeElement.innerHTML = "1 File selected";
       const reader = new FileReader();
       reader.readAsText(file);
 
