@@ -6,7 +6,7 @@
             style="background-color:#362291; color: white;">
             <i style="color: white;" class="fas fa-align-left"></i>
         </button>
-        <span class="ml-3"><b>Currently using: </b>{{publicKey ? publicKey : "No Keys Found!"}}</span>
+        <span class="ml-3" #currentPublicKey><b>Currently using: </b>{{publicKey ? publicKey : "No Keys Found!"}}</span>
 
         <div class="container text-center pt-4">
             <router-outlet></router-outlet>

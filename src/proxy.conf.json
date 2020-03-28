@@ -19,5 +19,12 @@
         "logLevel": "debug",
         "changeOrigin": true,
         "pathRewrite": {"^/transactionHistory" : ""}
+    },
+    "/checkBalance": {
+        "target": "http://0.0.0.0:9000/checkBalance",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {"^/checkBalance" : ""}
     }
 }

@@ -1,5 +1,5 @@
 <h4 class="mt-4">Current Balance:</h4>
-<h1 class="mt-4"><strong>{{balance}} 15</strong></h1>
+<h1 class="mt-4"><strong>{{balance}}</strong></h1>
 <h4>VJ Coins</h4>
 
 <hr>
@@ -17,6 +17,7 @@
         </button>
     </div>
 </div>
+<input type="text" class="form-control mt-4" placeholder="Message" [(ngModel)]="message">
 
 
 <input class="btn btn-lg btn-success mt-4" type="button" value="Pay" (click)="sendCoins()">
@@ -27,8 +28,10 @@
 <!-- For QR Code -->
 <h4 class="mt-4">Your Public Key:</h4>
 <img src="" alt="">
-<div>{{publicKey}}</div>
-<button class="btn btn-lg btn-success mt-4" (click)="copyPublicKey()">
+<div id="publicKey">
+    <textarea type="text" class="form-control mt-4" value={{publicKey}} #userinput readonly></textarea>
+</div>
+<button class="btn btn-lg btn-success mt-4" (click)="copyPublicKey(userinput)">
     Copy Public Key
     <i class="fas fa-copy ml-4"></i>
 </button>

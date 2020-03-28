@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { WalletService } from '../services/wallet.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NUMBER_TYPE } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class BlockchainClientService {
   blockchainServerMakeTransaction = '/makeTransaction';
   blockchainServerSendTransaction = '/sendTransaction';
   blockchainServerTransactionHistory = '/transactionHistory';
+  blockchainServerCheckBalance = '/checkBalance';
   blockchainBurnAccountPublicKey = `MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmoylu2ohWpnsOlGXB+
   yZkQzMQnSqfH00o4lfVWSEzJG8mlIiZM+gdRo6trGyCDWv5rRScmp/yEz6RcDNk9t5CQ==`;
   blockchainBurnAmount = '1';
@@ -64,9 +66,9 @@ export class BlockchainClientService {
   }
 
   async addData(data) {
-    const makeTransactionRequestData = {
+    let makeTransactionRequestData = {
       receiver_public_key: this.blockchainBurnAccountPublicKey,
-      sender_public_key: this.walletService.getPublicKey(),
+      sender_public_key: '',
       message: data,
       bounty: this.blockchainBurnAmount
     };
@@ -77,6 +79,8 @@ export class BlockchainClientService {
     };
 
     if (this.walletService.getPublicKey()) {
+      makeTransactionRequestData.sender_public_key = this.walletService.getPublicKey();
+
       // create transaction and add to blockchain
       await this.addDataToBlockchain(makeTransactionRequestData)
         .then((response) => {
@@ -90,6 +94,62 @@ export class BlockchainClientService {
     }
 
     return responseData;
+  }
+
+  async sendCoins(receiverPublicKey, amount, message) {
+    let makeTransactionRequestData = {
+      receiver_public_key: receiverPublicKey,
+      sender_public_key: '',
+      message: message,
+      bounty: amount
+    };
+
+    const responseData = {
+      status: '',
+      message: ''
+    };
+
+    if (this.walletService.getPublicKey()) {
+      makeTransactionRequestData.sender_public_key = this.walletService.getPublicKey();
+
+      // create transaction and add to blockchain
+      await this.addDataToBlockchain(makeTransactionRequestData)
+        .then((response) => {
+          responseData.status = response.status;
+          responseData.message = response.message;
+        });
+
+    } else {
+      responseData.status = 'Error';
+      responseData.message = 'No keys found to send coins, please add a key pair first!';
+    }
+
+    return responseData;
+  }
+
+  async getBalance(publicKey) {
+    const balanceRequestData = {
+      public_key: publicKey
+    };
+
+    const balanceData = { 
+      balance: 0,
+      message: ''
+    };
+
+    await this.http
+      .post(this.blockchainServerCheckBalance, balanceRequestData)
+      .toPromise()
+      .then((res) => {
+        balanceData.balance = res;
+        balanceData.message = 'Success';
+      },
+        (error) => {
+          balanceData.message = 'Unable to fetch balance, please try again.';
+        }
+      );
+
+    return balanceData;
   }
 
   async getTransactionHistory(adderPublicKey) {
