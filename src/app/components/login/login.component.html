@@ -9,8 +9,19 @@
 <hr>
 
 <h4 class="mt-4">Public Key:</h4>
-<div>{{keys?.publicKey}}</div>
+<div>
+    {{keys?.publicKey}}
+    <button *ngIf="keys?.publicKey" class="btn btn-lg btn-success mt-4" (click)="copyPublicKey()">
+        <i class="fas fa-copy"></i>
+    </button>
+</div>
 
 <h4 class="mt-4">Private Key:</h4>
-<div>{{keys?.privateKey}}</div>
+<div>
+    {{keys?.privateKey}}
+    <button *ngIf="keys?.privateKey" class="btn btn-lg btn-success mt-4" (click)="copyPrivateKey()">
+        <i class="fas fa-copy"></i>
+    </button>
+</div>
+
 <input *ngIf="keys?.publicKey" type="button" class="btn btn-lg btn-success mt-4" value="Update" (click)="updateKeys()">

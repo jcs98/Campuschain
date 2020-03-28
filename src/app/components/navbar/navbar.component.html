@@ -12,6 +12,12 @@
             </a>
         </li>
         <li>
+            <a [routerLink]="['/payments']">
+                <i class="fas fa-dollar-sign"></i>
+                Payments
+            </a>
+        </li>
+        <li>
             <a href="#certificateSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <i class="fas fa-graduation-cap"></i>
                 VJTI Transcript
@@ -26,14 +32,32 @@
                 <li>
                     <a [routerLink]="['/verify-leaf']" style="color: black;">
                         <i class="fas fa-check"></i>
-                        Verify Certificate
+                        Verify Transcript
                     </a>
                 </li>
             </ul>
         </li>
         <li>
+            <a [routerLink]="['/certificates']">
+                <i class="fas fa-certificate"></i>
+                Certificates
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/documents']">
+                <i class="fas fa-file"></i>
+                Documents / Tenders
+            </a>
+        </li>
+        <li>
+            <a [routerLink]="['/bulk-payments']">
+                <i class="fas fa-edit"></i>
+                Assignment Incentives
+            </a>
+        </li>
+        <li>
             <a [routerLink]="['/login']">
-                <i class="fas fa-briefcase"></i>
+                <i class="fas fa-key"></i>
                 Update Keys
             </a>
         </li>

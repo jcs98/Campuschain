@@ -1,0 +1,34 @@
+<h4 class="mt-4">Current Balance:</h4>
+<h1 class="mt-4"><strong>{{balance}} 15</strong></h1>
+<h4>VJ Coins</h4>
+
+<hr>
+
+<h2 class="mt-4">Send</h2>
+<input type="text" class="form-control mt-4" placeholder="Amount" [(ngModel)]="amount">
+<div class="row mt-4">
+    <div class="col">
+        <input type="text" class="form-control mt-1" placeholder="Paste receiver's public key here"
+            [(ngModel)]="receiverPublicKey">
+    </div>
+    <div class="col-1">
+        <button class="btn btn-lg btn-success" (click)="getPublicFromCamera()">
+            <i class="fas fa-camera"></i>
+        </button>
+    </div>
+</div>
+
+
+<input class="btn btn-lg btn-success mt-4" type="button" value="Pay" (click)="sendCoins()">
+
+<hr>
+
+<h2 class="mt-4">Receive</h2>
+<!-- For QR Code -->
+<h4 class="mt-4">Your Public Key:</h4>
+<img src="" alt="">
+<div>{{publicKey}}</div>
+<button class="btn btn-lg btn-success mt-4" (click)="copyPublicKey()">
+    Copy Public Key
+    <i class="fas fa-copy ml-4"></i>
+</button>

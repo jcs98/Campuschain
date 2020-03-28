@@ -1,0 +1,31 @@
+<h2>Upload student details to send incentives</h2>
+
+<div class="bucket mt-4">
+    <input type="file" accept=".csv" (change)="parseFile($event.target.files)">
+    <i class="fas fa-upload fa-3x mb-3"></i>
+    <h3>{{rows ? "File Uploaded" : "Drag and drop CSV or click in this area"}}</h3>
+</div>
+
+<input class="btn btn-lg btn-success mt-4" *ngIf="rows" type="button" value="Send Incentives"
+    (click)="generateCertificates()">
+
+<div class="scrolling-table">
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Assignment Name</th>
+                <th>Marks</th>
+                <th>Public Key</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows">
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

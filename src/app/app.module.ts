@@ -10,6 +10,10 @@ import { VerifyLeafComponent } from './components/verify-leaf/verify-leaf.compon
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from './components/home/home.component';
+import { PaymentsComponent } from './components/payments/payments.component';
+import { CertificatesComponent } from './components/certificates/certificates.component';
+import { DocumentsComponent } from './components/documents/documents.component';
+import { BulkPaymentsComponent } from './components/bulk-payments/bulk-payments.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { HomeComponent } from './components/home/home.component';
     UploadBatchComponent,
     VerifyLeafComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    PaymentsComponent,
+    CertificatesComponent,
+    DocumentsComponent,
+    BulkPaymentsComponent
   ],
   imports: [
     BrowserModule,
