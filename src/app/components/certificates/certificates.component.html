@@ -5,7 +5,7 @@
         <div class="bucket mt-4">
             <input type="file" accept="image/*" (change)="parseTemplateFile($event.target.files)">
             <i class="fas fa-upload fa-3x mb-3"></i>
-            <h3>{{rows ? "Template Uploaded" : "Upload certificate template image"}}</h3>
+            <h3>{{imageSrc ? "Template Uploaded" : "Upload certificate template image"}}</h3>
         </div>
     </div>
     <div class="col">
@@ -17,18 +17,25 @@
     </div>
 </div>
 
-<input class="btn btn-lg btn-success mt-4" *ngIf="rows && template" type="button" value="Generate Certificates"
+<input class="btn btn-lg btn-success mt-4" *ngIf="rows && imageSrc" type="button" value="Generate Certificates"
     (click)="generateCertificates()">
 
-<div class="certificate">
-    <!-- Create html certificate here & convert to pdf -->
+<div *ngIf="imageSrc" id="certi-holder">
+    <img id="certi-img" [src]="imageSrc || '#'" alt="certificate template" />
+    <div id="certi-txt">
+        This certificate is awarded to <strong>{{certiName}}</strong>
+        <br>
+        for {{certiFor}}
+        <br>
+        {{certiSign}}
+    </div>
 </div>
 
 <div class="scrolling-table">
     <table class="table table-hover mt-4">
         <thead>
             <tr>
-                <th>Student ID</th>
+                <th>Student Name</th>
                 <th>Certificate for</th>
             </tr>
         </thead>
