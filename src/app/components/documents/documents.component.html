@@ -3,7 +3,7 @@
 <div class="bucket mt-4">
     <input type="file" accept=".pdf" (change)="parseFile($event.target.files)">
     <i class="fas fa-upload fa-3x mb-3"></i>
-    <h3>{{rows ? "File Uploaded" : "Drag and drop PDF or click in this area"}}</h3>
+    <h3>{{pdfFile ? "File Uploaded" : "Drag and drop PDF or click in this area"}}</h3>
 </div>
 
 <input type="button" class="btn btn-lg btn-success mt-4" value="Add document hash to blockchain"

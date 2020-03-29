@@ -41,7 +41,7 @@ export class BlockchainClientService {
             .then((sendTransactionResponse) => {
               if (sendTransactionResponse === 'Done') {
                 responseData.status = 'Success';
-                responseData.message = 'Added Merkle root to the blockchain.';
+                responseData.message = 'Added data to the blockchain.';
               }
             },
               (error) => {
@@ -97,7 +97,7 @@ export class BlockchainClientService {
   }
 
   async sendCoins(receiverPublicKey, amount, message) {
-    let makeTransactionRequestData = {
+    const makeTransactionRequestData = {
       receiver_public_key: receiverPublicKey,
       sender_public_key: '',
       message: message,
