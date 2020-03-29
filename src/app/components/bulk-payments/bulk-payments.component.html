@@ -7,7 +7,7 @@
 </div>
 
 <input class="btn btn-lg btn-success mt-4" *ngIf="rows" type="button" value="Send Incentives"
-    (click)="generateCertificates()">
+    (click)="sendIncentives()">
 
 <div class="scrolling-table">
     <table class="table table-hover mt-4">
@@ -17,6 +17,7 @@
                 <th>Assignment Name</th>
                 <th>Marks</th>
                 <th>Public Key</th>
+                <th>{{sendIncentivesClicked ? "Coins Sent?" : ""}}</th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,7 @@
                 <td>{{row[1]}}</td>
                 <td>{{row[2]}}</td>
                 <td>{{row[3]}}</td>
+                <td>{{row[4] ? row[4] : ''}}</td>
             </tr>
         </tbody>
     </table>

@@ -26,8 +26,6 @@ export class PaymentsComponent implements OnInit {
   async sendCoins() {
     const transactionResponse = await this.blockchainClientService.sendCoins(this.receiverPublicKey, this.amount, this.message).then((response) => { return response });
 
-    console.log(transactionResponse);
-
     if (transactionResponse.status === 'Success') {
       //  Insert flash message code
       alert('Coins successfully sent!')

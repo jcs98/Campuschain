@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { WalletService } from '../services/wallet.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NUMBER_TYPE } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +10,7 @@ export class BlockchainClientService {
   blockchainServerSendTransaction = '/sendTransaction';
   blockchainServerTransactionHistory = '/transactionHistory';
   blockchainServerCheckBalance = '/checkBalance';
-  blockchainBurnAccountPublicKey = `MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmoylu2ohWpnsOlGXB+
-  yZkQzMQnSqfH00o4lfVWSEzJG8mlIiZM+gdRo6trGyCDWv5rRScmp/yEz6RcDNk9t5CQ==`;
+  blockchainBurnAccountPublicKey = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmoylu2ohWpnsOlGXB+yZkQzMQnSqfH00o4lfVWSEzJG8mlIiZM+gdRo6trGyCDWv5rRScmp/yEz6RcDNk9t5CQ==';
   blockchainBurnAmount = '1';
   sendThis: any;
   signThis: any;
@@ -141,7 +139,8 @@ export class BlockchainClientService {
       .post(this.blockchainServerCheckBalance, balanceRequestData)
       .toPromise()
       .then((res) => {
-        balanceData.balance = res;
+        // tslint:disable-next-line: radix
+        balanceData.balance = parseInt(res.toString());
         balanceData.message = 'Success';
       },
         (error) => {
