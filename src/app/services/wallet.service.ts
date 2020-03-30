@@ -85,6 +85,10 @@ export class WalletService {
     return sig;
   }
 
+  verifySign(msg: string, signature: string, publicKey: string): boolean {
+    return true;
+  }
+
   setPin(pin: string) {
     // store pin hash
   }

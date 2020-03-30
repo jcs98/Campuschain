@@ -14,6 +14,7 @@ import { PaymentsComponent } from './components/payments/payments.component';
 import { CertificatesComponent } from './components/certificates/certificates.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { BulkPaymentsComponent } from './components/bulk-payments/bulk-payments.component';
+import { VerifyCertificateComponent } from './components/verify-certificate/verify-certificate.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BulkPaymentsComponent } from './components/bulk-payments/bulk-payments.
     PaymentsComponent,
     CertificatesComponent,
     DocumentsComponent,
-    BulkPaymentsComponent
+    BulkPaymentsComponent,
+    VerifyCertificateComponent
   ],
   imports: [
     BrowserModule,

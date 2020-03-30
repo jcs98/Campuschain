@@ -18,11 +18,11 @@
             </a>
         </li>
         <li>
-            <a href="#certificateSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <a href="#transcriptSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <i class="fas fa-graduation-cap"></i>
                 VJTI Transcript
             </a>
-            <ul class="collapse list-unstyled" id="certificateSubmenu">
+            <ul class="collapse list-unstyled" id="transcriptSubmenu">
                 <li>
                     <a [routerLink]="['/upload-batch']" style="color: black;">
                         <i class="fas fa-upload"></i>
@@ -38,10 +38,24 @@
             </ul>
         </li>
         <li>
-            <a [routerLink]="['/certificates']">
+            <a href="#certificateSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <i class="fas fa-certificate"></i>
                 Certificates
             </a>
+            <ul class="collapse list-unstyled" id="certificateSubmenu">
+                <li>
+                    <a [routerLink]="['/certificates']" style="color: black;">
+                        <i class="fas fa-upload"></i>
+                        Generate Certificates
+                    </a>
+                </li>
+                <li>
+                    <a [routerLink]="['/verify-certificate']" style="color: black;">
+                        <i class="fas fa-check"></i>
+                        Verify Certificate
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a [routerLink]="['/documents']">

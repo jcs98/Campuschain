@@ -7,6 +7,7 @@ import { UploadBatchComponent } from './components/upload-batch/upload-batch.com
 import { VerifyLeafComponent } from './components/verify-leaf/verify-leaf.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 import { CertificatesComponent } from './components/certificates/certificates.component';
+import { VerifyCertificateComponent } from './components/verify-certificate/verify-certificate.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { BulkPaymentsComponent } from './components/bulk-payments/bulk-payments.component';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'verify-leaf', component: VerifyLeafComponent },
   { path: 'payments', component: PaymentsComponent },
   { path: 'certificates', component: CertificatesComponent },
+  { path: 'verify-certificate', component: VerifyCertificateComponent },
   { path: 'documents', component: DocumentsComponent },
   { path: 'bulk-payments', component: BulkPaymentsComponent }
 ];

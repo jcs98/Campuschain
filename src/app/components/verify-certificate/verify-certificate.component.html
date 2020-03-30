@@ -1,0 +1,29 @@
+<h2>Verify Certificate</h2>
+
+<h4 class="mt-4">Certificate Data:</h4>
+
+<div class="row mt-4">
+    <div class="col">
+        <input type="text" class="form-control mt-1" placeholder="Name on certificate" [(ngModel)]="name">
+    </div>
+    <div class="col">
+        <input type="text" class="form-control mt-1" placeholder="Certificate awarded for" [(ngModel)]="certiFor">
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col">
+        <input type="text" class="form-control mt-1" placeholder="Paste digital signature here" [(ngModel)]="signature">
+    </div>
+    <div class="col-1">
+        <button class="btn btn-lg btn-success" (click)="getPublicFromCamera()">
+            <i class="fas fa-camera"></i>
+        </button>
+    </div>
+</div>
+
+<h4 class="mt-4">Adder's Public Key:</h4>
+<input type="text" class="form-control" placeholder="Paste adder's public key here" [(ngModel)]="adderPublicKey">
+
+<input *ngIf="name && certiFor && signature && adderPublicKey" class="btn btn-lg btn-success mt-4" type="button"
+    value="Verify" (click)="verifySign()">
