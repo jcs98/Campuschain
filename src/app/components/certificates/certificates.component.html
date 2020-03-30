@@ -20,15 +20,9 @@
 <input class="btn btn-lg btn-success mt-4" *ngIf="rows && imageSrc" type="button" value="Generate Certificates"
     (click)="generateCertificates()">
 
-<div *ngIf="imageSrc" id="certi-holder">
-    <img id="certi-img" [src]="imageSrc || '#'" alt="certificate template" />
-    <div id="certi-txt">
-        This certificate is awarded to <strong>{{certiName}}</strong>
-        <br>
-        for {{certiFor}}
-        <br>
-        {{certiSign}}
-    </div>
+<div id="certi-holder" *ngIf="imageSrc">
+    <img class="certi-img" [src]="imageSrc || '#'" alt="certificate template" />
+    <div class="certi-txt"></div>
 </div>
 
 <div class="scrolling-table">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MerkleService } from '../../services/merkle.service';
+import { WalletService } from '../../services/wallet.service';
 import { Papa } from 'ngx-papaparse';
 import * as html2pdf from 'html2pdf.js';
 import { saveAs } from 'file-saver';
@@ -21,11 +21,8 @@ const certiPdfOptions = {
 export class CertificatesComponent implements OnInit {
   private imageSrc: string;
   private rows: any;
-  private certiName: string;
-  private certiFor: string;
-  private certiSign: string;
 
-  constructor(private papa: Papa, private merkleService: MerkleService) { }
+  constructor(private papa: Papa, private walletService: WalletService) { }
 
   ngOnInit() {
   }
@@ -80,13 +77,23 @@ export class CertificatesComponent implements OnInit {
     const zip = new JSZip();
 
     this.rows.forEach(row => {
-      this.certiName = row[0].toString();
-      this.certiFor = row[1].toString();
-      this.certiSign = this.getSign(row);
-      const content: Element = document.getElementById('certi-holder');
+      const content: any = document.getElementById('certi-holder').cloneNode(true);
+      const certiName = row[0].toString();
+      const certiFor = row[1].toString();
+      const certiSign = this.getSign(row);
+
+      const certiTxt = `<div class="certi-txt">
+                            This certificate is awarded to <strong id="certi-name">${certiName}</strong>
+                            <br>
+                            for ${certiFor}
+                            <br><br>
+                            ${certiSign}
+                        </div>`;
+
+      content.querySelector('.certi-txt').innerHTML = certiTxt;
 
       zip.file(
-        this.certiName + '.pdf',
+        certiName + '.pdf',
         html2pdf()
           .from(content)
           .set(certiPdfOptions)
@@ -102,7 +109,7 @@ export class CertificatesComponent implements OnInit {
   }
 
   getSign(row) {
-    return row.toString();
+    return this.walletService.sign(row.join(''));
   }
 
 }
