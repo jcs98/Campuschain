@@ -130,7 +130,7 @@ export class BlockchainClientService {
       public_key: publicKey
     };
 
-    const balanceData = { 
+    const balanceData = {
       balance: 0,
       message: ''
     };
@@ -165,7 +165,7 @@ export class BlockchainClientService {
         transactionHistory = res;
       },
         (error) => {
-          console.log(error);
+          transactionHistory = 'Unable to connect to the blockchain, please try again later!';
         }
       );
 

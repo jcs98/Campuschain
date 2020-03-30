@@ -29,8 +29,6 @@ export class DocumentsComponent implements OnInit {
 
       reader.onload = (e) => {
         this.pdfFile = reader.result.toString();
-        // console.log(this.pdfFile);
-        // console.log(sha256(this.pdfFile));
       };
     }
   }
@@ -67,21 +65,24 @@ export class DocumentsComponent implements OnInit {
       const transactions = await this.blockchainClientService.getTransactionHistory(this.adderPublicKey)
         .then((response) => response);
 
-      let success = false;
-
-      transactions.forEach(tx => {
-        const blockchainPdfHash = JSON.parse(tx).message;
-        if (pdfHash === blockchainPdfHash) {
-          success = true;
-        }
-      });
-
-      if (success) {
-        alert('Verified Successfully!');
+      if (transactions === 'Unable to connect to the blockchain, please try again later!') {
+        alert(transactions);
       } else {
-        alert('Verification unsuccessful');
-      }
+        let success = false;
 
+        transactions.forEach(tx => {
+          const blockchainPdfHash = JSON.parse(tx).message;
+          if (pdfHash === blockchainPdfHash) {
+            success = true;
+          }
+        });
+
+        if (success) {
+          alert('Verified Successfully!');
+        } else {
+          alert('Verification unsuccessful');
+        }
+      }
     } else {
       alert('Upload both file and public key to verify!');
     }
