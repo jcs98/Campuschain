@@ -68,12 +68,12 @@ export class UploadBatchComponent implements OnInit {
     let index = 0;
     rows.forEach(row => {
       const student: any = {};
-      student.cpi = row[2].toString();
-      student.name = row[1].toString();
-      student.year = row[3].toString();
       student.studentId = row[0].toString();
+      student.name = row[1].toString();
+      student.cpi = row[2].toString();
+      student.year = row[3].toString();
+      student.college = row[4].toString();
       student.merklePath = this.merkleService.getMerklePath(index);
-      student.leafNode = this.merkleService.getLeaf(index);
       zip.file(student.studentId + '.json', JSON.stringify(student));
       index++;
     });

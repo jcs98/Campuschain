@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MerkleService } from '../../services/merkle.service';
+import { sha3_256 as sha3256} from 'js-sha3';
 import { BlockchainClientService } from '../../services/blockchain-client.service';
 
 @Component({
@@ -50,7 +51,6 @@ export class VerifyLeafComponent implements OnInit {
   async verifyFromBlockchain() {
     const data = this.leafData;
 
-
     const transactions = await this.blockchainClientService.getTransactionHistory(this.adderPublicKey)
       .then((response) => response);
 
@@ -58,8 +58,11 @@ export class VerifyLeafComponent implements OnInit {
 
     transactions.forEach(tx => {
       const blockchainMerkleRoot = JSON.parse(tx).message;
+
+      const leafNodeData = data.studentId + data.name + data.cpi + data.year + data.college;
+
       if (this._isHex(blockchainMerkleRoot)) {
-        const validRoot = this.merkleService.getRootFromLeaf(data.merklePath, data.leafNode, blockchainMerkleRoot);
+        const validRoot = this.merkleService.getRootFromLeaf(data.merklePath, sha3256(leafNodeData), blockchainMerkleRoot);
 
         if (validRoot) {
           success = true;
