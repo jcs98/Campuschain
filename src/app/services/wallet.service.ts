@@ -85,8 +85,23 @@ export class WalletService {
     return sig;
   }
 
+  signCertificate(msg: string): string {
+    // check pin if required
+    const msgHash = sha256(msg);
+    const privateKey = this.getPrivateKey();
+    const keyPair = this.ec.keyFromPrivate(privateKey);
+    const signature = keyPair.sign(msgHash);
+    const sig = JSON.stringify(signature);
+    return sig;
+  }
+
   verifySign(msg: string, signature: string, publicKey: string): boolean {
-    return true;
+    const pemPublicKey = '-----BEGIN PUBLIC KEY-----\n' + publicKey.substring(0, 64) + '\n' + publicKey.substring(64) + '\n-----END PUBLIC KEY-----';
+
+    const rawPublicKey = this.keyEncoder.encodePublic(pemPublicKey, 'pem', 'raw');
+    const keyPair = this.ec.keyFromPublic(rawPublicKey, 'hex');
+    const validSignature = keyPair.verify(sha256(msg), JSON.parse(signature));
+    return validSignature;
   }
 
   setPin(pin: string) {

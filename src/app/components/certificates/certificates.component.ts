@@ -82,6 +82,7 @@ export class CertificatesComponent implements OnInit {
       const certiFor = row[1].toString();
       const certiSign = this.getSign(row);
 
+      // Kept here for now since easier to copy and paste in verify
       console.log(certiSign);
 
       const certiTxt = `<div class="certi-txt">
@@ -111,7 +112,8 @@ export class CertificatesComponent implements OnInit {
   }
 
   getSign(row) {
-    return this.walletService.sign(row.join(''));
+    return this.walletService.signCertificate(row.join(''));
+    // return this.walletService.sign(row.join(''));
   }
 
 }
