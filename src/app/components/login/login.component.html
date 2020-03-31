@@ -10,16 +10,20 @@
 
 <h4 class="mt-4">Public Key:</h4>
 <div>
-    {{keys?.publicKey}}
-    <button *ngIf="keys?.publicKey" class="btn btn-lg btn-success mt-4" (click)="copyPublicKey()">
+    <div id="publicKey">
+        <textarea type="text" class="form-control mt-4" value={{keys?.publicKey}} #newPublicKey readonly></textarea>
+    </div>
+    <button *ngIf="keys?.publicKey" class="btn btn-lg btn-success mt-4" (click)="copyPublicKey(newPublicKey)">
         <i class="fas fa-copy"></i>
     </button>
 </div>
 
 <h4 class="mt-4">Private Key:</h4>
 <div>
-    {{keys?.privateKey}}
-    <button *ngIf="keys?.privateKey" class="btn btn-lg btn-success mt-4" (click)="copyPrivateKey()">
+    <div id="privateKey">
+        <textarea type="text" class="form-control mt-4" value={{keys?.privateKey}} #newPrivateKey readonly></textarea>
+    </div>    
+    <button *ngIf="keys?.privateKey" class="btn btn-lg btn-success mt-4" (click)="copyPrivateKey(newPrivateKey)">
         <i class="fas fa-copy"></i>
     </button>
 </div>

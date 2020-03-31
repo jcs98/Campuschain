@@ -28,4 +28,16 @@ export class LoginComponent implements OnInit {
     this.walletService.storeKeys(this.keys);
   }
 
+  copyPublicKey(inputElement) {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 999999);
+  }
+
+  copyPrivateKey(inputElement) {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 999999);
+  }
+
 }

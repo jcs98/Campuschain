@@ -82,6 +82,8 @@ export class CertificatesComponent implements OnInit {
       const certiFor = row[1].toString();
       const certiSign = this.getSign(row);
 
+      console.log(certiSign);
+
       const certiTxt = `<div class="certi-txt">
                             This certificate is awarded to <strong id="certi-name">${certiName}</strong>
                             <br>
