@@ -96,7 +96,9 @@ export class WalletService {
   }
 
   verifySign(msg: string, signature: string, publicKey: string): boolean {
-    const pemPublicKey = '-----BEGIN PUBLIC KEY-----\n' + publicKey.substring(0, 64) + '\n' + publicKey.substring(64) + '\n-----END PUBLIC KEY-----';
+    const pemPublicKey = '-----BEGIN PUBLIC KEY-----\n'
+      + publicKey.substring(0, 64) + '\n' + publicKey.substring(64)
+      + '\n-----END PUBLIC KEY-----';
 
     const rawPublicKey = this.keyEncoder.encodePublic(pemPublicKey, 'pem', 'raw');
     const keyPair = this.ec.keyFromPublic(rawPublicKey, 'hex');

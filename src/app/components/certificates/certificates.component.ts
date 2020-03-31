@@ -90,7 +90,9 @@ export class CertificatesComponent implements OnInit {
                             <br>
                             for ${certiFor}
                             <br><br>
-                            ${certiSign}
+                            <div style="width: 40%; word-wrap: break-word; display: inline-block;">
+                              ${certiSign}
+                            </div>
                         </div>`;
 
       content.querySelector('.certi-txt').innerHTML = certiTxt;
