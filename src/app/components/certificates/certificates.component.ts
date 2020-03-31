@@ -4,6 +4,7 @@ import { Papa } from 'ngx-papaparse';
 import * as html2pdf from 'html2pdf.js';
 import { saveAs } from 'file-saver';
 import * as JSZip from 'jszip';
+const QRious = require('qrious');
 
 const certiPdfOptions = {
   margin: [0, 0],
@@ -83,7 +84,12 @@ export class CertificatesComponent implements OnInit {
       const certiSign = this.getSign(row);
 
       // Kept here for now since easier to copy and paste in verify
-      console.log(certiSign);
+      // console.log(certiSign);
+
+      const qr = new QRious({
+        value: certiSign
+      });
+      const uri = qr.toDataURL();
 
       const certiTxt = `<div class="certi-txt">
                             This certificate is awarded to <strong id="certi-name">${certiName}</strong>
@@ -91,7 +97,7 @@ export class CertificatesComponent implements OnInit {
                             for ${certiFor}
                             <br><br>
                             <div style="width: 40%; word-wrap: break-word; display: inline-block;">
-                              ${certiSign}
+                              <img alt="" src=${uri}>
                             </div>
                         </div>`;
 
