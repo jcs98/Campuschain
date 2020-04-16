@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { QRCodeModule } from 'angularx-qrcode';
+import { NgQrScannerModule } from 'angular2-qrscanner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +37,8 @@ import { VerifyCertificateComponent } from './components/verify-certificate/veri
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    QRCodeModule
+    QRCodeModule,
+    NgQrScannerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
