@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   private inputSecretPhrase: string;
   private encryptedMessage: string;
 
-  constructor(private walletService: WalletService, private aesEncryptionService: AesEncryptionService) { }
+  constructor(private walletService: WalletService) { }
 
   ngOnInit() { }
 
