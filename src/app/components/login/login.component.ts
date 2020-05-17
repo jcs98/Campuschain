@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { saveAs } from 'file-saver';
 import { WalletService } from '../../services/wallet.service';
-import { AesEncryptionService } from '../../services/aes-encryption.service';
 import * as CryptoJS from 'crypto-js';
 
 @Component({
