@@ -1,30 +1,22 @@
-# Campuschain
+<h1 align="center">Campuschain</h1>
+<h3 align="center">Blockchain-based solution to improve Academic Governance</h3>
 
-## Development server
-Run `npm install`  
-Run `npm start` for a dev server.   
-Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<h2 align="center">Demo</h2>
 
-Use TS Lint and SCSS formatter
+Click the image below to view the demo  
+[![Demo](demo.png)](https://www.youtube.com/watch?v=K39dX1fLaLY&feature=youtu.be)
 
-## Code scaffolding
+## Use Cases Implemented
+* Payments
+* Transcripts Authentication
+* Certificate Generation and Validation
+* Document Verification
+* Assignment Incentives
+* Key Management (Elliptic Curve: p256)
 
-Run `ng generate component components/component-name` to generate a new component.  
-Run `ng generate service services/service-name` to generate a new service.  
-You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<h2 align="center">Architecture</h2>
+<p align="center">
+<img width=900px src="arch.jpg" alt="architecture">
+</p>
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+The application is fully compatible with the VJTIchain and has been tested locally by creating a testbed with a local instance of the chain
