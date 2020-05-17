@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { QrScannerComponent } from 'angular2-qrscanner';
 import { BlockchainClientService } from '../../services/blockchain-client.service';
 import { WalletService } from '../../services/wallet.service';
 
@@ -16,8 +17,17 @@ export class PaymentsComponent implements OnInit {
   private message;
   private receiverPublicKey;
 
+  private displayProperty = 'none';
+
 
   constructor(private walletService: WalletService, private blockchainClientService: BlockchainClientService) { }
+
+  @ViewChild(QrScannerComponent, {static: false}) qrScannerComponent: QrScannerComponent;
+  
+  ngAfterViewInit() {
+    qrScannerComponent: QrScannerComponent;
+  }
+
 
   ngOnInit() {
     this.getBalance();
@@ -55,6 +65,39 @@ export class PaymentsComponent implements OnInit {
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 999999);
+  }
+
+  getPublicFromCamera() {
+    this.displayProperty = 'block';
+    this.qrScannerComponent.getMediaDevices().then(devices => {
+      // console.log(devices);
+      const videoDevices: MediaDeviceInfo[] = [];
+      for (const device of devices) {
+        if (device.kind.toString() === 'videoinput') {
+          videoDevices.push(device);
+        }
+      }
+      if (videoDevices.length > 0) {
+        let choosenDev;
+        for (const dev of videoDevices) {
+          if (dev.label.includes('front')) {
+            choosenDev = dev;
+            break;
+          }
+        }
+        if (choosenDev) {
+          this.qrScannerComponent.chooseCamera.next(choosenDev);
+        } else {
+          this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
+        }
+      }
+    });
+
+    this.qrScannerComponent.capturedQr.subscribe(result => {
+      this.receiverPublicKey = result;
+      this.displayProperty = 'none';
+      console.log(this.displayProperty);
+    });
   }
 
 }

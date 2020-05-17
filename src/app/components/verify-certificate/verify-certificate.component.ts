@@ -35,6 +35,7 @@ export class VerifyCertificateComponent implements OnInit {
 
   getPublicFromCamera() {
     this.cameraButtonClicked = true;
+    this.displayProperty = 'block';
     this.qrScannerComponent.getMediaDevices().then(devices => {
       // console.log(devices);
       const videoDevices: MediaDeviceInfo[] = [];
