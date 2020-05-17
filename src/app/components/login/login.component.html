@@ -1,5 +1,13 @@
-<h4 class="mt-4">Import wallet using a private key</h4>
-<input type="text" class="form-control mt-4" placeholder="Paste your private key here" [(ngModel)]="inputPrivateKey">
+<h4 class="mt-4">Import wallet using a credentials file</h4>
+
+<div class="bucket mt-4">
+    <input type="file" accept=".txt" (change)="parseFile($event.target.files)">
+    <i class="fas fa-upload fa-3x mb-3"></i>
+    <h3>{{encryptedMessage ? "File Uploaded" : "Drag your credentials.txt file or click in this area"}}</h3>
+</div>
+
+<input type="text" class="form-control mt-4" placeholder="Input your secret phrase here" [(ngModel)]="importSecretPhrase">
+
 <input type="button" class="btn btn-lg btn-success mt-4" value="Import" (click)="importKeys()">
 
 <h4 class="mt-4">or</h4>
@@ -9,23 +17,25 @@
 <hr>
 
 <h4 class="mt-4">Public Key:</h4>
-<div>
-    <div id="publicKey">
+<div class="row mt-4">
+    <div id="publicKey" class="col-11">
         <textarea type="text" class="form-control mt-4" value={{keys?.publicKey}} #newPublicKey readonly></textarea>
     </div>
-    <button *ngIf="keys?.publicKey" class="btn btn-lg btn-success mt-4" (click)="copyPublicKey(newPublicKey)">
-        <i class="fas fa-copy"></i>
-    </button>
-</div>
-
-<h4 class="mt-4">Private Key:</h4>
-<div>
-    <div id="privateKey">
-        <textarea type="text" class="form-control mt-4" value={{keys?.privateKey}} #newPrivateKey readonly></textarea>
-    </div>    
-    <button *ngIf="keys?.privateKey" class="btn btn-lg btn-success mt-4" (click)="copyPrivateKey(newPrivateKey)">
-        <i class="fas fa-copy"></i>
-    </button>
+    <div class="col-1">
+        <button *ngIf="keys?.publicKey" class="btn btn-lg btn-success mt-4" (click)="copyPublicKey(newPublicKey)">
+            <i class="fas fa-copy"></i>
+        </button>
+    </div>
 </div>
 
 <input *ngIf="keys?.publicKey" type="button" class="btn btn-lg btn-success mt-4" value="Update" (click)="updateKeys()">
+
+<!-- To download the wallet credentials -->
+<h4 class="mt-4">Backup Profile? </h4>
+<p class="mt-4">
+    Please enter a secret phrase. Use this to restore your keys.
+</p>
+
+<input type="text" class="form-control mt-4" placeholder="Enter your secret key here eg. vjti123" [(ngModel)]="inputSecretPhrase">
+
+<input *ngIf="inputSecretPhrase" type="button" class="btn btn-lg btn-success mt-4" value="Download" (click)="downloadKeys()">
