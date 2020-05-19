@@ -12,6 +12,7 @@ import * as JSZip from 'jszip';
 })
 export class UploadBatchComponent implements OnInit {
   private rows;
+  private columnHeadings;
 
   constructor(private papa: Papa, private merkleService: MerkleService, private blockchainClientService: BlockchainClientService) { }
 
@@ -34,7 +35,8 @@ export class UploadBatchComponent implements OnInit {
         this.papa.parse(csv, {
           skipEmptyLines: true,
           complete: (result) => {
-            this.rows = result.data;
+            this.columnHeadings = result.data[0];
+            this.rows = result.data.slice(1);
           }
         });
       };
@@ -66,15 +68,15 @@ export class UploadBatchComponent implements OnInit {
     const zip = new JSZip();
 
     let index = 0;
+
     rows.forEach(row => {
-      const student: any = {};
-      student.studentId = row[0].toString();
-      student.name = row[1].toString();
-      student.cpi = row[2].toString();
-      student.year = row[3].toString();
-      student.college = row[4].toString();
-      student.merklePath = this.merkleService.getMerklePath(index);
-      zip.file(student.studentId + '.json', JSON.stringify(student));
+      const studentData: any = {};
+      row.forEach((rowData, indexNo) => {
+        const studentDataKey = this.columnHeadings[indexNo];
+        studentData[studentDataKey] = rowData;
+      });
+      studentData.merklePath = this.merkleService.getMerklePath(index);
+      zip.file((index + 1) + '.json', JSON.stringify(studentData));
       index++;
     });
 

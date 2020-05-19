@@ -11,21 +11,15 @@
 <div class="scrolling-table">
     <table class="table table-hover mt-4">
         <thead>
-            <tr>
-                <th>Student ID</th>
-                <th>Name</th>
-                <th>CPI</th>
-                <th>Batch</th>
-                <th>College</th>
-            </tr>
+            <ng-container *ngFor="let columnHeading of columnHeadings">
+                <th> {{columnHeading}} </th>
+            </ng-container>
         </thead>
         <tbody>
             <tr *ngFor="let row of rows">
-                <td>{{row[0]}}</td>
-                <td>{{row[1]}}</td>
-                <td>{{row[2]}}</td>
-                <td>{{row[3]}}</td>
-                <td>{{row[4]}}</td>
+                <ng-container *ngFor="let rowData of row">
+                    <td> {{rowData}} </td>
+                </ng-container>
             </tr>
         </tbody>
     </table>
