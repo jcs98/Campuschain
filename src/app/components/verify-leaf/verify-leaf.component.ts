@@ -12,6 +12,8 @@ export class VerifyLeafComponent implements OnInit {
 
   private leafData;
   private adderPublicKey;
+  private leafDataKeys;
+  private leafDataValues = [];
 
   constructor(private merkleService: MerkleService, private blockchainClientService: BlockchainClientService) { }
 
@@ -31,6 +33,15 @@ export class VerifyLeafComponent implements OnInit {
 
       reader.onload = (e) => {
         this.leafData = JSON.parse(reader.result as string);
+        this.leafDataKeys = Object.keys(this.leafData);
+        this.leafDataKeys.forEach((key) => {
+          if (key != 'merklePath') {
+            let leafDataValue = [];
+            leafDataValue.push(key);
+            leafDataValue.push(this.leafData[key]);
+            this.leafDataValues.push(leafDataValue);
+          }
+        });
       };
     }
   }
@@ -62,7 +73,11 @@ export class VerifyLeafComponent implements OnInit {
       transactions.forEach(tx => {
         const blockchainMerkleRoot = JSON.parse(tx).message;
 
-        const leafNodeData = data.studentId + data.name + data.cpi + data.year + data.college;
+        let leafNodeData = '';
+
+        this.leafDataValues.forEach(leafDataValue => {
+          leafNodeData += leafDataValue[1];
+        });
 
         if (this._isHex(blockchainMerkleRoot)) {
           const validRoot = this.merkleService.getRootFromLeaf(data.merklePath, sha3256(leafNodeData), blockchainMerkleRoot);

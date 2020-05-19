@@ -70,7 +70,6 @@ export class PaymentsComponent implements OnInit {
   getPublicFromCamera() {
     this.displayProperty = 'block';
     this.qrScannerComponent.getMediaDevices().then(devices => {
-      // console.log(devices);
       const videoDevices: MediaDeviceInfo[] = [];
       for (const device of devices) {
         if (device.kind.toString() === 'videoinput') {
@@ -96,7 +95,6 @@ export class PaymentsComponent implements OnInit {
     this.qrScannerComponent.capturedQr.subscribe(result => {
       this.receiverPublicKey = result;
       this.displayProperty = 'none';
-      console.log(this.displayProperty);
     });
   }
 

@@ -12,8 +12,13 @@
 <input *ngIf="leafData && adderPublicKey" class="btn btn-lg btn-success mt-4" type="button" value="Verify"
     (click)="verifyFromBlockchain()">
 
-<div class="mt-4"> <strong>Id:</strong> {{leafData?.studentId}}</div>
-<div class="mt-4"> <strong>Name:</strong> {{leafData?.name}}</div>
-<div class="mt-4"> <strong>CPI:</strong> {{leafData?.cpi}}</div>
-<div class="mt-4"> <strong>Year:</strong> {{leafData?.year}}</div>
-<div class="mt-4"> <strong>College:</strong> {{leafData?.college}}</div>
+<div class="scrolling-table">
+    <table class="table table-hover mt-4">
+        <tbody>
+            <tr *ngFor="let leafDataValue of leafDataValues">
+                <td><strong> {{leafDataValue[0]}}</strong> </td>
+                <td> {{leafDataValue[1]}} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
