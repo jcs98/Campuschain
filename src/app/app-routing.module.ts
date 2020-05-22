@@ -15,12 +15,12 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'upload-batch', component: UploadBatchComponent },
-  { path: 'verify-leaf', component: VerifyLeafComponent },
-  { path: 'payments', component: PaymentsComponent },
-  { path: 'certificates', component: CertificatesComponent },
-  { path: 'verify-certificate', component: VerifyCertificateComponent },
-  { path: 'documents', component: DocumentsComponent },
-  { path: 'bulk-payments', component: BulkPaymentsComponent }
+  { path: 'verify-leaf', component: VerifyLeafComponent } //,
+  // { path: 'payments', component: PaymentsComponent },
+  // { path: 'certificates', component: CertificatesComponent },
+  // { path: 'verify-certificate', component: VerifyCertificateComponent },
+  // { path: 'documents', component: DocumentsComponent },
+  // { path: 'bulk-payments', component: BulkPaymentsComponent }
 ];
 
 @NgModule({
