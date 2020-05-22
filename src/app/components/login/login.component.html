@@ -30,10 +30,17 @@
 
 <input *ngIf="keys?.publicKey" type="button" class="btn btn-lg btn-success mt-4" value="Update" (click)="updateKeys()">
 
+<p *ngIf="keys?.publicKey" class="mt-4">
+    We recommend you to download your keys by backing up (given below) after updating.
+</p>
+
+
 <!-- To download the wallet credentials -->
-<h4 class="mt-4">Backup Profile? </h4>
+<h4 class="mt-4">Backup Profile? <br> <strong>Recommended</strong> </h4>
+
 <p class="mt-4">
-    Please enter a secret phrase. Use this to restore your keys.
+    Please enter a secret phrase.
+    Please keep the downloaded credentials file safely and use it and the secret phrase you will enter below to restore your wallet.
 </p>
 
 <input type="text" class="form-control mt-4" placeholder="Enter your secret key here eg. vjti123" [(ngModel)]="inputSecretPhrase">

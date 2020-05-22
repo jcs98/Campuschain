@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   }
 
   importKeys() {
-    const decryptedText = CryptoJS.AES.decrypt(this.encryptedMessage.trim(), this.importSecretPhrase.trim()).toString(CryptoJS.enc.Utf8); 
+    const decryptedText = CryptoJS.AES.decrypt(this.encryptedMessage.trim(), this.importSecretPhrase.trim()).toString(CryptoJS.enc.Utf8);
     const credentials = JSON.parse(decryptedText);
 
     this.keys = this.walletService.importKeysFromPrivate(credentials.Private_Key);
@@ -73,21 +73,26 @@ export class LoginComponent implements OnInit {
   }
 
   downloadKeys() {
-    const privateKey = this.walletService.getPrivateKey();
-    const publicKey = this.walletService.getPublicKey();
+    if (this.walletService.getPublicKey()) {
 
-    const credentials1: any = {};
-    credentials1.Public_Key = publicKey;
-    credentials1.Private_Key = privateKey;
+      const privateKey = this.walletService.getPrivateKey();
+      const publicKey = this.walletService.getPublicKey();
 
-    const encryptedCredentials = CryptoJS.AES.encrypt(JSON.stringify(credentials1).trim(), this.inputSecretPhrase.trim()).toString();
-    const blob = new Blob([encryptedCredentials], {
-      type: 'text/plain;charset=utf-8'
-    });
+      const credentials1: any = {};
+      credentials1.Public_Key = publicKey;
+      credentials1.Private_Key = privateKey;
 
-    saveAs(blob, 'credentials.txt');
+      const encryptedCredentials = CryptoJS.AES.encrypt(JSON.stringify(credentials1).trim(), this.inputSecretPhrase.trim()).toString();
+      const blob = new Blob([encryptedCredentials], {
+        type: 'text/plain;charset=utf-8'
+      });
 
-    this.inputSecretPhrase = '';
+      saveAs(blob, 'credentials.txt');
+
+      this.inputSecretPhrase = '';
+    } else {
+      alert('No keys found, please generate the keys first');
+    }
   }
 
 }

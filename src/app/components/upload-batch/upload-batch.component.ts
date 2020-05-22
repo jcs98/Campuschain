@@ -36,7 +36,11 @@ export class UploadBatchComponent implements OnInit {
           skipEmptyLines: true,
           complete: (result) => {
             this.columnHeadings = result.data[0];
+            this.columnHeadings.push('Timestamp of Record Addition');
             this.rows = result.data.slice(1);
+            this.rows.forEach(row => {
+              row = row.push(new Date().toLocaleString());
+            });
           }
         });
       };
