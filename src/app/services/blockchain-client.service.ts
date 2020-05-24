@@ -6,10 +6,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BlockchainClientService {
-  blockchainServerMakeTransaction = '/makeTransaction';
-  blockchainServerSendTransaction = '/sendTransaction';
-  blockchainServerTransactionHistory = '/transactionHistory';
-  blockchainServerCheckBalance = '/checkBalance';
+  blockchainServerBaseUrl = 'http://chain.vjti-bct.in:9000';
+  blockchainServerMakeTransaction = this.blockchainServerBaseUrl + '/makeTransaction';
+  blockchainServerSendTransaction = this.blockchainServerBaseUrl + '/sendTransaction';
+  blockchainServerTransactionHistory = this.blockchainServerBaseUrl + '/transactionHistory';
+  blockchainServerCheckBalance = this.blockchainServerBaseUrl + '/checkBalance';
   blockchainBurnAccountPublicKey = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEwSqmy08loUJkNy+MpXsumjjGcCaW9bgR0AFXqOMPGIyvNj20fratnsdjxzDtWrlkfpRoVqjUGds544oko5PXhA==';
   blockchainBurnAmount = '1';
   sendThis: any;

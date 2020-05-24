@@ -1,27 +1,27 @@
 {
     "/makeTransaction": {
-        "target": "http://chain.vjti-bct.in:9000/makeTransaction",
+        "target": "http://0.0.0.0:9000/makeTransaction",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true,
         "pathRewrite": {"^/makeTransaction" : ""}
     },
     "/sendTransaction": {
-        "target": "http://chain.vjti-bct.in:9000/sendTransaction",
+        "target": "http://0.0.0.0:9000/sendTransaction",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true,
         "pathRewrite": {"^/sendTransaction" : ""}
     },
     "/transactionHistory": {
-        "target": "http://chain.vjti-bct.in:9000/transactionHistory",
+        "target": "http://0.0.0.0:9000/transactionHistory",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true,
         "pathRewrite": {"^/transactionHistory" : ""}
     },
     "/checkBalance": {
-        "target": "http://chain.vjti-bct.in:9000/checkBalance",
+        "target": "http://0.0.0.0:9000/checkBalance",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true,
