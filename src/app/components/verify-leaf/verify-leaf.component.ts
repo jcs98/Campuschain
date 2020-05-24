@@ -10,10 +10,10 @@ import { BlockchainClientService } from '../../services/blockchain-client.servic
 })
 export class VerifyLeafComponent implements OnInit {
 
-  private leafData;
-  private adderPublicKey;
-  private leafDataKeys;
-  private leafDataValues = [];
+  leafData;
+  adderPublicKey;
+  leafDataKeys;
+  leafDataValues = [];
 
   constructor(private merkleService: MerkleService, private blockchainClientService: BlockchainClientService) { }
 

@@ -8,8 +8,8 @@ import { Papa } from 'ngx-papaparse';
   styleUrls: ['./bulk-payments.component.scss']
 })
 export class BulkPaymentsComponent implements OnInit {
-  private rows;
-  private sendIncentivesClicked = false;
+  rows;
+  sendIncentivesClicked = false;
 
   constructor(private papa: Papa, private blockchainClientService: BlockchainClientService) { }
 

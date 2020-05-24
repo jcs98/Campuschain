@@ -9,15 +9,12 @@ import { WalletService } from '../../services/wallet.service';
   styleUrls: ['./payments.component.scss']
 })
 export class PaymentsComponent implements OnInit {
-  private balance = 0;
-
-  private publicKey;
-
-  private amount;
-  private message;
-  private receiverPublicKey;
-
-  private displayProperty = 'none';
+  balance = 0;
+  publicKey;
+  amount;
+  message;
+  receiverPublicKey;
+  displayProperty = 'none';
 
 
   constructor(private walletService: WalletService, private blockchainClientService: BlockchainClientService) { }

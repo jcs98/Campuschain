@@ -8,8 +8,8 @@ import { BlockchainClientService } from '../../services/blockchain-client.servic
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit {
-  private pdfFile;
-  private adderPublicKey;
+  pdfFile;
+  adderPublicKey;
 
   constructor(private blockchainClientService: BlockchainClientService) { }
 

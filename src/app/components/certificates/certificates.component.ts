@@ -20,8 +20,8 @@ const certiPdfOptions = {
   styleUrls: ['./certificates.component.scss']
 })
 export class CertificatesComponent implements OnInit {
-  private imageSrc: string;
-  private rows: any;
+  imageSrc: string;
+  rows: any;
 
   constructor(private papa: Papa, private walletService: WalletService) { }
 

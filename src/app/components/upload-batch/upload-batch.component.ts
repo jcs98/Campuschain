@@ -11,8 +11,8 @@ import * as JSZip from 'jszip';
   styleUrls: ['./upload-batch.component.scss']
 })
 export class UploadBatchComponent implements OnInit {
-  private rows;
-  private columnHeadings;
+  rows;
+  columnHeadings;
 
   constructor(private papa: Papa, private merkleService: MerkleService, private blockchainClientService: BlockchainClientService) { }
 

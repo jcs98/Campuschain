@@ -9,11 +9,10 @@ import * as CryptoJS from 'crypto-js';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  private keys: any;
-  private importSecretPhrase: string;
-
-  private inputSecretPhrase: string;
-  private encryptedMessage: string;
+  keys: any;
+  importSecretPhrase: string;
+  inputSecretPhrase: string;
+  encryptedMessage: string;
 
   constructor(private walletService: WalletService) { }
 

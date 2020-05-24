@@ -7,8 +7,8 @@ import { WalletService } from './services/wallet.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  private publicKey: string;
-  private sideBarIsActive: boolean;
+  publicKey: string;
+  sideBarIsActive: boolean;
 
   constructor(public walletService: WalletService) { }
 

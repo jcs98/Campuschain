@@ -8,12 +8,12 @@ import { WalletService } from 'src/app/services/wallet.service';
   styleUrls: ['./verify-certificate.component.scss']
 })
 export class VerifyCertificateComponent implements OnInit {
-  private name;
-  private certiFor;
-  private signature;
-  private adderPublicKey;
-  private cameraButtonClicked: boolean;
-  private displayProperty = 'none';
+  name;
+  certiFor;
+  signature;
+  adderPublicKey;
+  cameraButtonClicked: boolean;
+  displayProperty = 'none';
 
   constructor(private walletService: WalletService) { }
 
