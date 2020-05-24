@@ -11,15 +11,15 @@
         <input type="text" class="form-control mt-1" placeholder="Paste receiver's public key here"
             [(ngModel)]="receiverPublicKey">
     </div>
-    <div class="col-1">
+    <!-- <div class="col-1">
         <button class="btn btn-lg btn-success" (click)="getPublicFromCamera()">
             <i class="fas fa-camera"></i>
         </button>
-    </div>
-    <div [style.display]="displayProperty">
+    </div> -->
+    <!-- <div [style.display]="displayProperty">
         <qr-scanner [debug]="false" [canvasWidth]="1080" [canvasHeight]="720" [stopAfterScan]="true" [updateTime]="500">
         </qr-scanner>
-    </div>
+    </div> -->
 </div>
 <input type="text" class="form-control mt-4" placeholder="Message" [(ngModel)]="message">
 

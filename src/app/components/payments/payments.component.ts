@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { QrScannerComponent } from 'angular2-qrscanner';
+// import { QrScannerComponent } from 'angular2-qrscanner';
 import { BlockchainClientService } from '../../services/blockchain-client.service';
 import { WalletService } from '../../services/wallet.service';
 
@@ -19,11 +19,11 @@ export class PaymentsComponent implements OnInit {
 
   constructor(private walletService: WalletService, private blockchainClientService: BlockchainClientService) { }
 
-  @ViewChild(QrScannerComponent, {static: false}) qrScannerComponent: QrScannerComponent;
+  // @ViewChild(QrScannerComponent, {static: false}) qrScannerComponent: QrScannerComponent;
   
-  ngAfterViewInit() {
-    qrScannerComponent: QrScannerComponent;
-  }
+  // ngAfterViewInit() {
+  //   qrScannerComponent: QrScannerComponent;
+  // }
 
 
   ngOnInit() {
@@ -64,35 +64,35 @@ export class PaymentsComponent implements OnInit {
     inputElement.setSelectionRange(0, 999999);
   }
 
-  getPublicFromCamera() {
-    this.displayProperty = 'block';
-    this.qrScannerComponent.getMediaDevices().then(devices => {
-      const videoDevices: MediaDeviceInfo[] = [];
-      for (const device of devices) {
-        if (device.kind.toString() === 'videoinput') {
-          videoDevices.push(device);
-        }
-      }
-      if (videoDevices.length > 0) {
-        let choosenDev;
-        for (const dev of videoDevices) {
-          if (dev.label.includes('front')) {
-            choosenDev = dev;
-            break;
-          }
-        }
-        if (choosenDev) {
-          this.qrScannerComponent.chooseCamera.next(choosenDev);
-        } else {
-          this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
-        }
-      }
-    });
+  // getPublicFromCamera() {
+  //   this.displayProperty = 'block';
+  //   this.qrScannerComponent.getMediaDevices().then(devices => {
+  //     const videoDevices: MediaDeviceInfo[] = [];
+  //     for (const device of devices) {
+  //       if (device.kind.toString() === 'videoinput') {
+  //         videoDevices.push(device);
+  //       }
+  //     }
+  //     if (videoDevices.length > 0) {
+  //       let choosenDev;
+  //       for (const dev of videoDevices) {
+  //         if (dev.label.includes('front')) {
+  //           choosenDev = dev;
+  //           break;
+  //         }
+  //       }
+  //       if (choosenDev) {
+  //         this.qrScannerComponent.chooseCamera.next(choosenDev);
+  //       } else {
+  //         this.qrScannerComponent.chooseCamera.next(videoDevices[0]);
+  //       }
+  //     }
+  //   });
 
-    this.qrScannerComponent.capturedQr.subscribe(result => {
-      this.receiverPublicKey = result;
-      this.displayProperty = 'none';
-    });
-  }
+  //   this.qrScannerComponent.capturedQr.subscribe(result => {
+  //     this.receiverPublicKey = result;
+  //     this.displayProperty = 'none';
+  //   });
+  // }
 
 }
