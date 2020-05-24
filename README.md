@@ -27,4 +27,5 @@ The application is fully compatible with the VJTIchain and has been tested local
 
 `cd server`  
 `npm install`  
+`export PORT=YOUR_PORT_NUMBER`  
 `node app`  
