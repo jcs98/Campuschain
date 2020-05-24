@@ -11,6 +11,12 @@ export class BlockchainClientService {
   blockchainServerSendTransaction = this.blockchainServerBaseUrl + '/sendTransaction';
   blockchainServerTransactionHistory = this.blockchainServerBaseUrl + '/transactionHistory';
   blockchainServerCheckBalance = this.blockchainServerBaseUrl + '/checkBalance';
+
+  // blockchainServerMakeTransaction = '/makeTransaction';
+  // blockchainServerSendTransaction = '/sendTransaction';
+  // blockchainServerTransactionHistory = '/transactionHistory';
+  // blockchainServerCheckBalance = '/checkBalance';
+
   blockchainBurnAccountPublicKey = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEwSqmy08loUJkNy+MpXsumjjGcCaW9bgR0AFXqOMPGIyvNj20fratnsdjxzDtWrlkfpRoVqjUGds544oko5PXhA==';
   blockchainBurnAmount = '1';
   sendThis: any;
