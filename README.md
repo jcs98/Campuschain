@@ -20,3 +20,11 @@ Click the image below to view the demo
 </p>
 
 The application is fully compatible with the VJTIchain and has been tested locally by creating a testbed with a local instance of the chain
+
+## Deployment
+`npm install`  
+`npm run build`  
+
+`cd server`  
+`npm install`  
+`node app`  
