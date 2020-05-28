@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BlockchainClientService {
-  blockchainServerBaseUrl = 'http://chain.vjti-bct.in:9000';
+  blockchainServerBaseUrl = 'http://localhost:8081';
   blockchainServerMakeTransaction = this.blockchainServerBaseUrl + '/makeTransaction';
   blockchainServerSendTransaction = this.blockchainServerBaseUrl + '/sendTransaction';
   blockchainServerTransactionHistory = this.blockchainServerBaseUrl + '/transactionHistory';
