@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class BlockchainClientService {
-  blockchainServerBaseUrl = 'http://localhost:8081';
+  blockchainServerBaseUrl = '';
   blockchainServerMakeTransaction = this.blockchainServerBaseUrl + '/makeTransaction';
   blockchainServerSendTransaction = this.blockchainServerBaseUrl + '/sendTransaction';
   blockchainServerTransactionHistory = this.blockchainServerBaseUrl + '/transactionHistory';
@@ -17,7 +17,7 @@ export class BlockchainClientService {
   // blockchainServerTransactionHistory = '/transactionHistory';
   // blockchainServerCheckBalance = '/checkBalance';
 
-  blockchainBurnAccountPublicKey = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEwSqmy08loUJkNy+MpXsumjjGcCaW9bgR0AFXqOMPGIyvNj20fratnsdjxzDtWrlkfpRoVqjUGds544oko5PXhA==';
+  blockchainBurnAccountPublicKey = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3JD9X3cN8cmQQjSLmeIPJnUjOPET2xAigQcLqM/NKrmPhexhTcow8QdoEuyoFAIvPOSwcFtwC2S/DzJKTf4xCw==';
   blockchainBurnAmount = '1';
   sendThis: any;
   signThis: any;
