@@ -19,10 +19,10 @@ app.all("*", function (req, res, next) {
 
   if (req.method === "POST") {
     // VJTI Blockchain URL
-    // var targetURL = "http://chain.vjti-bct.in:9000";
+    var targetURL = "http://chain.vjti-bct.in:9000";
 
     // Test Blockchain URL
-    var targetURL = "http://0.0.0.0:9000";
+    // var targetURL = "http://0.0.0.0:9000";  
 
     request(
       {
