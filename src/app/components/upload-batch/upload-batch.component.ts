@@ -10,7 +10,7 @@ import * as JSZip from 'jszip';
   templateUrl: './upload-batch.component.html',
   styleUrls: ['./upload-batch.component.scss']
 })
-export class UploadBatchComponent implements OnInit {
+export class UploadBatchComponent implements OnInit{
   rows;
   columnHeadings;
 
@@ -29,7 +29,7 @@ export class UploadBatchComponent implements OnInit {
 
       const reader = new FileReader();
       reader.readAsText(file);
-
+      
       reader.onload = (e) => {
         const csv = reader.result.toString();
         this.papa.parse(csv, {
@@ -46,7 +46,7 @@ export class UploadBatchComponent implements OnInit {
       };
     }
   }
-
+  
   checkFile(file) {
     if (file.type !== 'text/csv') {
       alert('File type must be csv !');
@@ -54,11 +54,11 @@ export class UploadBatchComponent implements OnInit {
     }
     return true;
   }
-
+  
   async addToBlockchain() {
     const merkleRoot = this.merkleService.getMerkleTreeRoot(this.rows);
     const responseData = await this.blockchainClientService.addData(merkleRoot).then((response) => response);
-
+    
     if (responseData.status === 'Success') {
       //  Insert flash message code
       this.downloadCertis(this.rows);

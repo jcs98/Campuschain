@@ -20,6 +20,8 @@ export class MerkleService {
   }
 
   getMerkleTreeRoot(rows) {
+    this.merkleTools.resetTree();
+
     rows.forEach(studentRecord => {
       let studentRecordData = '';
 
