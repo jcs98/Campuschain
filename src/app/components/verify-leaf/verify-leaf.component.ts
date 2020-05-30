@@ -14,6 +14,7 @@ export class VerifyLeafComponent implements OnInit {
   adderPublicKey;
   leafDataKeys;
   leafDataValues = [];
+  file;
 
   constructor(private merkleService: MerkleService, private blockchainClientService: BlockchainClientService) { }
 
@@ -22,14 +23,14 @@ export class VerifyLeafComponent implements OnInit {
 
   parseFile(files: FileList) {
     if (files && files.length > 0) {
-      const file = files.item(0);
-      if (!this.checkFile(file)) {
+      this.file = files.item(0);
+      if (!this.checkFile(this.file)) {
         // clear files here
         return;
       }
 
       const reader = new FileReader();
-      reader.readAsText(file);
+      reader.readAsText(this.file);
 
       reader.onload = (e) => {
         this.leafData = JSON.parse(reader.result as string);
@@ -90,9 +91,16 @@ export class VerifyLeafComponent implements OnInit {
 
       if (success) {
         alert('Verified Successfully!');
+
       } else {
         alert('Verification unsuccessful');
       }
+
+      this.file = null;
+      this.leafData = null;
+      this.adderPublicKey = null;
+      this.leafDataKeys = null;
+      this.leafDataValues = [];
     }
   }
 

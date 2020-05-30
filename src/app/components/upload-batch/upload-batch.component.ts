@@ -22,7 +22,7 @@ export class UploadBatchComponent implements OnInit{
 
   parseFile(files: FileList) {
     if (files && files.length > 0) {
-      const file = files.item(0);
+      let file = files.item(0);
       if (!this.checkFile(file)) {
         // clear files here
         return;
@@ -49,6 +49,7 @@ export class UploadBatchComponent implements OnInit{
             if(!studentIdColumnPresent) {
               alert('CSV file doesn\'t contain the Student ID column');
               this.columnHeadings = [];
+              file = null;
               return;
             } else {
               this.columnHeadings.push('Timestamp of Record Addition');
