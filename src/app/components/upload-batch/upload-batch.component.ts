@@ -13,6 +13,7 @@ import * as JSZip from 'jszip';
 export class UploadBatchComponent implements OnInit{
   rows;
   columnHeadings;
+  studentIdColumnName;
 
   constructor(private papa: Papa, private merkleService: MerkleService, private blockchainClientService: BlockchainClientService) { }
 
@@ -29,21 +30,38 @@ export class UploadBatchComponent implements OnInit{
 
       const reader = new FileReader();
       reader.readAsText(file);
-      
+
+      let studentIdColumnPresent = false;
+
       reader.onload = (e) => {
         const csv = reader.result.toString();
         this.papa.parse(csv, {
           skipEmptyLines: true,
           complete: (result) => {
             this.columnHeadings = result.data[0];
-            this.columnHeadings.push('Timestamp of Record Addition');
-            this.rows = result.data.slice(1);
-            this.rows.forEach(row => {
-              row = row.push(new Date().toLocaleString());
+            this.columnHeadings.forEach(columnName => {
+              const columnNameTemp = columnName.replace(/\s/g, '');
+              if(columnNameTemp.toLowerCase() === 'studentid') {
+                studentIdColumnPresent = true;
+                this.studentIdColumnName = columnName;
+              }
             });
+            if(!studentIdColumnPresent) {
+              alert('CSV file doesn\'t contain the Student ID column');
+              this.columnHeadings = [];
+              return;
+            } else {
+              this.columnHeadings.push('Timestamp of Record Addition');
+              this.rows = result.data.slice(1);
+              this.rows.forEach(row => {
+                row = row.push(new Date().toLocaleString());
+              });
+            }
           }
         });
       };
+
+
     }
   }
   
@@ -80,7 +98,7 @@ export class UploadBatchComponent implements OnInit{
         studentData[studentDataKey] = rowData;
       });
       studentData.merklePath = this.merkleService.getMerklePath(index);
-      zip.file((index + 1) + '.json', JSON.stringify(studentData));
+      zip.file(studentData[this.studentIdColumnName] + '.json', JSON.stringify(studentData));
       index++;
     });
 
