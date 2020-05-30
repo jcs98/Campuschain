@@ -81,6 +81,8 @@ export class UploadBatchComponent implements OnInit{
     if (responseData.status === 'Success') {
       //  Insert flash message code
       this.downloadCertis(this.rows);
+      this.rows = null;
+      this.columnHeadings = null;
     } else {
       //  Insert flash message code for error
       alert(responseData.message);

@@ -17,7 +17,7 @@ export class BlockchainClientService {
   // blockchainServerTransactionHistory = '/transactionHistory';
   // blockchainServerCheckBalance = '/checkBalance';
 
-  blockchainBurnAccountPublicKey = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3JD9X3cN8cmQQjSLmeIPJnUjOPET2xAigQcLqM/NKrmPhexhTcow8QdoEuyoFAIvPOSwcFtwC2S/DzJKTf4xCw==';
+  blockchainBurnAccountPublicKey = 'MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEwSqmy08loUJkNy+MpXsumjjGcCaW9bgR0AFXqOMPGIyvNj20fratnsdjxzDtWrlkfpRoVqjUGds544oko5PXhA==';
   blockchainBurnAmount = '1';
   sendThis: any;
   signThis: any;
